@@ -1,0 +1,66 @@
+/* =========================
+   Navbar
+   ========================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  z-index: 1000;
+
+  transition:
+    background-color 0.3s ease,
+    backdrop-filter 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Glass panel once the page scrolls, dark to match the neural background */
+.navbar-scrolled {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================
+   Container
+   ========================= */
+
+.navbar-container {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 16px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* PillNav renders its own internal spacing; this just keeps
+     the brand text and PillNav from touching on very narrow screens */
+  gap: 16px;
+}
+
+
+/* =========================
+   Brand
+   ========================= */
+
+.navbar-brand {
+  color: #ffffff;
+  text-decoration: none;
+
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+
+  transition: opacity 0.2s ease;
+}
+
+.navbar-brand:hover {
+  opacity: 0.75;
+}

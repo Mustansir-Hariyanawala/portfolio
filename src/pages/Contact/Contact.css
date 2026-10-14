@@ -1,0 +1,277 @@
+/* =========================
+   Contact Page
+   ========================= */
+
+.contact-page {
+  width: 100%;
+
+  padding: 140px 24px 100px;
+}
+
+
+/* =========================
+   Header
+   ========================= */
+
+.contact-header {
+  width: 100%;
+  max-width: 800px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.contact-label {
+  margin: 0 0 10px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-title {
+  margin: 0;
+
+  font-size: clamp(3rem, 7vw, 5rem);
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  color: #ffffff;
+}
+
+.contact-subtitle {
+  max-width: 650px;
+
+  margin: 24px auto 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   Content
+   ========================= */
+
+.contact-content {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 80px auto 0;
+
+  display: grid;
+
+  grid-template-columns: 0.8fr 1.2fr;
+
+  gap: 80px;
+
+  align-items: start;
+}
+
+
+/* =========================
+   Contact Information
+   ========================= */
+
+.contact-info h2 {
+  margin: 0;
+
+  font-size: 2rem;
+
+  color: #ffffff;
+}
+
+.contact-info > p {
+  margin: 18px 0 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   Contact Items
+   ========================= */
+
+.contact-item {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+
+  margin-top: 32px;
+}
+
+.contact-item-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.contact-item a {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 0.95rem;
+
+  word-break: break-word;
+
+  transition: opacity 0.2s ease;
+}
+
+.contact-item a:hover {
+  opacity: 0.65;
+}
+
+
+/* =========================
+   Form
+   ========================= */
+
+.contact-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 22px;
+
+  padding: 36px;
+
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 16px;
+}
+
+
+/* =========================
+   Form Group
+   ========================= */
+
+.form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+
+  font-weight: 600;
+
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 13px 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+
+  outline: none;
+
+  background-color: rgba(255, 255, 255, 0.04);
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 0.95rem;
+
+  resize: vertical;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.form-group input {
+  min-height: 48px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.06);
+
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================
+   Submit Button
+   ========================= */
+
+/* The button itself is now SpecularButton (see Contact.jsx) — this just
+   controls layout around it and makes it full-width within the form. */
+.contact-submit-wrap {
+  margin-top: 4px;
+}
+
+.contact-submit-wrap button {
+  width: 100%;
+}
+
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 800px) {
+
+  .contact-page {
+    padding: 120px 20px 80px;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+
+    gap: 60px;
+
+    margin-top: 60px;
+  }
+
+  .contact-info {
+    text-align: center;
+  }
+
+  .contact-item {
+    align-items: center;
+  }
+
+  .contact-form {
+    padding: 28px 22px;
+  }
+}

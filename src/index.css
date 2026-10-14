@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+/* =========================
+   Fonts
+   ========================= */
+
+/* Sora: geometric, slightly wide — used for headings so the big hero
+   name/titles have real presence instead of the browser default.
+   Inter: neutral, highly legible at small sizes — used for body copy,
+   labels, buttons. This heading/body pairing is a common portfolio combo
+   because the two families contrast in weight without clashing in style. */
+
+
+:root {
+  --font-heading: 'Sora', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  /* Black fallback so there's no flash-of-white before NeuralBackground's
+     canvas paints, and white text by default so pages don't each need to
+     repeat this. Individual elements can still override opacity/color. */
+  background-color: #000000;
+  color: #f5f5f5;
+
+  font-family: var(--font-body);
+  /* A hair tighter than the browser default (16px normal) so body text
+     doesn't look loose against the bolder heading font. */
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  /* Negative tracking on display type is what makes big bold headings feel
+     "designed" rather than default-browser-stretched; tighter as size grows. */
+  letter-spacing: -0.02em;
+}

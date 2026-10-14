@@ -1,0 +1,141 @@
+/* =========================
+   Project Card
+   ========================= */
+
+.project-card {
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.05);
+
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================
+   Image
+   ========================= */
+
+.project-card-image-link {
+  display: block;
+
+  overflow: hidden;
+
+  /* Faint bottom border so the image doesn't bleed straight into the
+     glass content panel below it when the thumbnail has a light edge. */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.project-card-image {
+  display: block;
+
+  width: 100%;
+  aspect-ratio: 16 / 10;
+
+  object-fit: cover;
+
+  /* Slightly dimmed by default, brightens on hover — keeps thumbnails
+     from fighting with the white UI chrome around them until you
+     actually engage with the card. */
+  filter: brightness(0.9);
+
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
+}
+
+.project-card:hover .project-card-image {
+  transform: scale(1.04);
+  filter: brightness(1);
+}
+
+
+/* =========================
+   Content
+   ========================= */
+
+.project-card-content {
+  padding: 24px;
+}
+
+.project-card-title {
+  margin: 0;
+}
+
+.project-card-title a {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 1.3rem;
+
+  transition: opacity 0.2s ease;
+}
+
+.project-card-title a:hover {
+  opacity: 0.75;
+}
+
+.project-card-description {
+  margin: 12px 0 0;
+
+  color: rgba(255, 255, 255, 0.6);
+
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   Technologies
+   ========================= */
+
+.project-card-technologies {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 20px;
+}
+
+.project-tag {
+  padding: 6px 10px;
+
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.05);
+
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+
+/* =========================
+   View Project CTA
+   ========================= */
+
+/* The link itself is now SpecularButton (see ProjectCard.jsx) — this
+   just controls the spacing around it. */
+.project-card-cta {
+  margin-top: 22px;
+}

@@ -1,0 +1,291 @@
+/* =========================
+   About Page
+   ========================= */
+
+.about-page {
+  width: 100%;
+
+  padding: 140px 24px 100px;
+}
+
+
+/* =========================
+   Header
+   ========================= */
+
+.about-header {
+  width: 100%;
+  max-width: 800px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.about-label {
+  margin: 0 0 10px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.about-title {
+  margin: 0;
+
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 1;
+
+  font-weight: 800;
+
+  color: #ffffff;
+}
+
+.about-subtitle {
+  max-width: 650px;
+
+  margin: 24px auto 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   Main Content
+   ========================= */
+
+.about-content {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 80px auto 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 24px;
+}
+
+
+/* =========================
+   Cards
+   ========================= */
+
+/* Glass panels: barely-there fill + soft white border, so cards read as
+   "lifted" off the neural background instead of blocking it entirely. */
+.about-card {
+  padding: 40px;
+
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.about-card:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.about-card h2 {
+  margin: 0 0 24px;
+
+  font-size: 1.6rem;
+
+  color: #ffffff;
+}
+
+.about-card p {
+  margin: 0 0 18px;
+
+  color: rgba(255, 255, 255, 0.6);
+
+  line-height: 1.8;
+}
+
+.about-card p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================
+   What I Do
+   ========================= */
+
+.focus-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 28px;
+}
+
+.focus-item h3 {
+  margin: 0 0 8px;
+
+  font-size: 1rem;
+
+  color: #ffffff;
+}
+
+.focus-item p {
+  margin: 0;
+
+  font-size: 0.95rem;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   Skills
+   ========================= */
+
+.skills-section {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 120px auto 0;
+}
+
+.skills-header {
+  text-align: center;
+
+  margin-bottom: 40px;
+}
+
+.skills-header h2 {
+  margin: 0;
+
+  font-size: clamp(2rem, 5vw, 3rem);
+
+  color: #ffffff;
+}
+
+.skills-header p:last-child {
+  margin: 14px auto 0;
+
+  color: rgba(255, 255, 255, 0.55);
+}
+
+
+/* =========================
+   Skills Grid
+   ========================= */
+
+/* flex + wrap instead of a fixed grid: with 7 skills in "4 columns" a grid
+   leaves the last row (3 items) stuck to the left with an empty gap where
+   the 4th column would be — flexbox with justify-content: center folds an
+   incomplete last row inward and centers it instead. */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 16px;
+}
+
+.skill-card {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  /* Replaces the old grid column sizing: each card claims roughly a
+     quarter of the row's width but can shrink, and grows to fill any
+     leftover space evenly so short/long skill names don't create
+     ragged card widths within the same row. */
+  flex: 1 1 calc(25% - 16px);
+  min-width: 140px;
+
+  min-height: 80px;
+
+  padding: 20px;
+
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.3);
+
+  color: #ffffff;
+
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 900px) {
+
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-card {
+    flex: 1 1 calc(33.333% - 16px);
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .about-page {
+    padding: 120px 20px 80px;
+  }
+
+  .about-content {
+    margin-top: 60px;
+  }
+
+  .about-card {
+    padding: 28px 24px;
+  }
+
+  .skills-section {
+    margin-top: 80px;
+  }
+
+  .skill-card {
+    flex: 1 1 calc(50% - 16px);
+  }
+}
+
+
+@media (max-width: 400px) {
+
+  .skill-card {
+    flex: 1 1 100%;
+  }
+}

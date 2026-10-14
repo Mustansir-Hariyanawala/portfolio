@@ -1,0 +1,173 @@
+/* =========================
+   Connect Section
+   ========================= */
+
+.connect {
+  width: 100%;
+
+  padding: 100px 24px;
+}
+
+
+/* =========================
+   Container
+   ========================= */
+
+.connect-container {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 50px;
+
+  padding: 48px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+}
+
+
+/* =========================
+   Content
+   ========================= */
+
+.connect-content {
+  max-width: 450px;
+}
+
+.connect-label {
+  margin: 0 0 8px;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.connect-title {
+  margin: 0;
+
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+
+.connect-description {
+  margin: 12px 0 0;
+
+  color: #666;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   Form
+   ========================= */
+
+.connect-form {
+  display: flex;
+
+  width: 100%;
+  max-width: 400px;
+
+  gap: 10px;
+}
+
+.connect-form input {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 12px 14px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  outline: none;
+
+  font-size: 0.95rem;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.connect-form input:focus {
+  border-color: #111;
+
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+.connect-form button {
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  color: white;
+  background-color: #111;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.connect-form button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .connect {
+    padding: 60px 20px 80px;
+  }
+
+  .connect-container {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    padding: 32px 24px;
+
+    gap: 32px;
+  }
+
+  .connect-content {
+    max-width: none;
+
+    text-align: center;
+  }
+
+  .connect-form {
+    max-width: none;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .connect-form {
+    flex-direction: column;
+  }
+
+  .connect-form button {
+    width: 100%;
+  }
+}

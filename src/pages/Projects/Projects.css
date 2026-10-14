@@ -1,0 +1,129 @@
+/* =========================
+   Projects Page
+   ========================= */
+
+.projects-page {
+  width: 100%;
+
+  padding: 140px 24px 100px;
+}
+
+
+/* =========================
+   Header
+   ========================= */
+
+.projects-header {
+  width: 100%;
+  max-width: 800px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.projects-label {
+  margin: 0 0 10px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.projects-title {
+  margin: 0;
+
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 1;
+
+  font-weight: 800;
+
+  color: #ffffff;
+}
+
+.projects-subtitle {
+  max-width: 650px;
+
+  margin: 24px auto 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   Search
+   ========================= */
+
+.projects-search {
+  margin-top: 60px;
+}
+
+
+/* =========================
+   Projects Grid
+   ========================= */
+
+.projects-grid {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 70px auto 0;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 24px;
+}
+
+
+/* =========================
+   Empty State
+   ========================= */
+
+.projects-empty {
+  grid-column: 1 / -1;
+
+  padding: 80px 20px;
+
+  text-align: center;
+}
+
+.projects-empty h2 {
+  margin: 0;
+
+  font-size: 1.5rem;
+
+  color: #ffffff;
+}
+
+.projects-empty p {
+  margin: 12px 0 0;
+
+  color: rgba(255, 255, 255, 0.55);
+}
+
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .projects-page {
+    padding: 120px 20px 80px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+
+    margin-top: 50px;
+  }
+}

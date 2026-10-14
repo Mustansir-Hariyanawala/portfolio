@@ -1,0 +1,263 @@
+/* =========================
+   Project Details
+   ========================= */
+
+.project-details-page {
+  width: 100%;
+
+  padding: 140px 24px 100px;
+}
+
+
+/* =========================
+   Header
+   ========================= */
+
+.project-details-header {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.project-back-link {
+  display: inline-block;
+
+  margin-bottom: 50px;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  text-decoration: none;
+
+  font-size: 0.9rem;
+
+  transition: color 0.2s ease;
+}
+
+.project-back-link:hover {
+  color: #ffffff;
+}
+
+.project-details-label {
+  margin: 0 0 10px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.project-details-header h1 {
+  margin: 0;
+
+  font-size: clamp(2.5rem, 6vw, 5rem);
+
+  line-height: 1;
+
+  color: #ffffff;
+}
+
+.project-details-description {
+  max-width: 700px;
+
+  margin: 28px auto 0;
+
+  color: rgba(255, 255, 255, 0.6);
+
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+
+/* =========================
+   Technologies
+   ========================= */
+
+.project-details-technologies {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 28px;
+}
+
+.project-details-tag {
+  padding: 7px 12px;
+
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.05);
+
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+
+/* =========================
+   Actions
+   ========================= */
+
+/* Buttons are now SpecularButton (see ProjectDetails.jsx) — this just
+   lays out the pair of them side by side. */
+.project-details-actions {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-top: 32px;
+}
+
+
+/* =========================
+   Preview
+   ========================= */
+
+.project-details-preview {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 80px auto 0;
+}
+
+.project-details-preview img {
+  display: block;
+
+  width: 100%;
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================
+   Features
+   ========================= */
+
+.project-details-features {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 100px auto 0;
+}
+
+.project-details-features h2,
+.project-screenshots h2 {
+  margin: 0 0 24px;
+
+  font-size: 2rem;
+
+  color: #ffffff;
+}
+
+.project-details-features ul {
+  margin: 0;
+
+  padding-left: 24px;
+}
+
+.project-details-features li {
+  margin-bottom: 12px;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   Screenshots
+   ========================= */
+
+.project-screenshots {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 100px auto 0;
+}
+
+.project-screenshots-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 24px;
+}
+
+.project-screenshots-grid img {
+  display: block;
+
+  width: 100%;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================
+   Not Found
+   ========================= */
+
+.project-not-found {
+  min-height: 60vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+
+  text-align: center;
+}
+
+.project-not-found h1 {
+  color: #ffffff;
+}
+
+.project-not-found a {
+  color: #ffffff;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 700px) {
+
+  .project-details-page {
+    padding: 120px 20px 80px;
+  }
+
+  .project-details-preview {
+    margin-top: 60px;
+  }
+
+  .project-details-features,
+  .project-screenshots {
+    margin-top: 70px;
+  }
+
+  .project-screenshots-grid {
+    grid-template-columns: 1fr;
+  }
+}

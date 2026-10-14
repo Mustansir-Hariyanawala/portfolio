@@ -1,0 +1,431 @@
+/* =========================
+   Experience Page
+   ========================= */
+
+.experience-page {
+  width: 100%;
+
+  padding: 140px 24px 100px;
+}
+
+
+/* =========================
+   Header
+   ========================= */
+
+.experience-header {
+  width: 100%;
+  max-width: 800px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.experience-label {
+  margin: 0 0 10px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.experience-title {
+  margin: 0;
+
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 1;
+
+  font-weight: 800;
+
+  color: #ffffff;
+}
+
+.experience-subtitle {
+  max-width: 650px;
+
+  margin: 24px auto 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   Timeline
+   ========================= */
+
+.experience-timeline {
+  position: relative;
+
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 100px auto 0;
+}
+
+
+/* Vertical Line */
+
+.experience-timeline::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  left: 20px;
+
+  width: 2px;
+
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+
+/* =========================
+   Timeline Item
+   ========================= */
+
+.experience-item {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 42px 1fr;
+
+  gap: 28px;
+
+  margin-bottom: 60px;
+}
+
+.experience-item:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================
+   Timeline Marker
+   ========================= */
+
+.timeline-marker {
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+}
+
+.timeline-marker span {
+  position: relative;
+
+  z-index: 2;
+
+  width: 14px;
+  height: 14px;
+
+  margin-top: 28px;
+
+  /* Border matches the page background, not the card — this is what
+     makes the dot look "punched through" the timeline line instead of
+     just sitting on top of it. */
+  border: 3px solid #000000;
+  border-radius: 50%;
+
+  background-color: #ffffff;
+
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+
+/* Current-role marker: bigger, glowing, gently pulsing so the active
+   job is unmistakable at a glance scanning down the timeline. */
+.timeline-marker span.marker-current {
+  width: 16px;
+  height: 16px;
+
+  margin-top: 27px;
+
+  background-color: #ffffff;
+
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.35),
+    0 0 16px rgba(255, 255, 255, 0.6);
+
+  animation: marker-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes marker-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.35),
+      0 0 16px rgba(255, 255, 255, 0.6);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.5),
+      0 0 26px rgba(255, 255, 255, 0.9);
+  }
+}
+
+
+/* =========================
+   Experience Card
+   ========================= */
+
+.experience-card {
+  padding: 32px;
+
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.experience-card:hover {
+  transform: translateY(-4px);
+
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.18);
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Current role's card gets a slightly brighter border so it reads as
+   "active" even without comparing marker dots side by side. */
+.experience-item.is-current .experience-card {
+  border-color: rgba(255, 255, 255, 0.22);
+  background-color: rgba(255, 255, 255, 0.045);
+}
+
+
+/* =========================
+   Card Header
+   ========================= */
+
+.experience-card-header {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.experience-role-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+.experience-card-header h2 {
+  margin: 0;
+
+  font-size: 1.4rem;
+
+  color: #ffffff;
+}
+
+.experience-card-header h3 {
+  margin: 6px 0 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* "Current" badge next to the active role's title */
+.current-badge {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 3px 10px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.08);
+
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.experience-meta {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 5px;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 0.85rem;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   Description
+   ========================= */
+
+.experience-description {
+  margin: 24px 0 0;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   Responsibilities
+   ========================= */
+
+.experience-responsibilities {
+  margin-top: 28px;
+}
+
+.experience-responsibilities h4 {
+  margin: 0 0 12px;
+
+  font-size: 0.95rem;
+
+  color: #ffffff;
+}
+
+.experience-responsibilities ul {
+  margin: 0;
+
+  padding-left: 20px;
+}
+
+.experience-responsibilities li {
+  margin-bottom: 8px;
+
+  color: rgba(255, 255, 255, 0.6);
+
+  line-height: 1.6;
+}
+
+.experience-responsibilities li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================
+   Technologies
+   ========================= */
+
+.experience-technologies {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 28px;
+}
+
+.technology-tag {
+  padding: 6px 10px;
+
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.05);
+
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.technology-tag:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+
+  color: #ffffff;
+}
+
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 700px) {
+
+  .experience-page {
+    padding: 120px 20px 80px;
+  }
+
+  .experience-timeline {
+    margin-top: 60px;
+  }
+
+  .experience-timeline::before {
+    left: 9px;
+  }
+
+  .experience-item {
+    grid-template-columns: 20px 1fr;
+
+    gap: 18px;
+
+    margin-bottom: 40px;
+  }
+
+  .timeline-marker span {
+    width: 12px;
+    height: 12px;
+
+    margin-top: 24px;
+  }
+
+  .timeline-marker span.marker-current {
+    width: 14px;
+    height: 14px;
+
+    margin-top: 23px;
+  }
+
+  .experience-card {
+    padding: 24px 20px;
+  }
+
+  .experience-card-header {
+    flex-direction: column;
+
+    gap: 14px;
+  }
+
+  .experience-meta {
+    align-items: flex-start;
+
+    white-space: normal;
+  }
+}
