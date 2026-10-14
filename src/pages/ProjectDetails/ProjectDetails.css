@@ -1,31 +1,11 @@
 /* =========================
-   Project Details
+   Back Link
    ========================= */
-
-.project-details-page {
-  width: 100%;
-
-  padding: 140px 24px 100px;
-}
-
-
-/* =========================
-   Header
-   ========================= */
-
-.project-details-header {
-  width: 100%;
-  max-width: 900px;
-
-  margin: 0 auto;
-
-  text-align: center;
-}
 
 .project-back-link {
   display: inline-block;
 
-  margin-bottom: 50px;
+  margin-bottom: 32px;
 
   color: rgba(255, 255, 255, 0.5);
 
@@ -40,6 +20,20 @@
   color: #ffffff;
 }
 
+
+/* =========================
+   Header
+   ========================= */
+
+.project-details-header {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+
+  align-items: start;
+
+  gap: 56px;
+}
+
 .project-details-label {
   margin: 0 0 10px;
 
@@ -52,10 +46,10 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
-.project-details-header h1 {
+.project-details-intro h1 {
   margin: 0;
 
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
 
   line-height: 1;
 
@@ -63,14 +57,99 @@
 }
 
 .project-details-description {
-  max-width: 700px;
-
-  margin: 28px auto 0;
+  margin: 28px 0 0;
 
   color: rgba(255, 255, 255, 0.6);
 
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   line-height: 1.8;
+}
+
+
+/* =========================
+   Actions
+   ========================= */
+
+/* Buttons are SpecularButton (see ProjectDetails.jsx) — this just
+   lays out the pair of them side by side. */
+.project-details-actions {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 32px;
+}
+
+
+/* =========================
+   Project Info Card
+   ========================= */
+
+.project-info-card {
+  padding: 8px 28px;
+
+  background-color: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+}
+
+.project-info-row {
+  padding: 22px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.project-info-row:last-child {
+  border-bottom: none;
+}
+
+.project-info-row h2 {
+  margin: 0 0 12px;
+
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.project-info-links {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.project-info-links a {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  transition: opacity 0.2s ease;
+}
+
+.project-info-links a:hover {
+  opacity: 0.65;
+}
+
+.project-info-value {
+  margin: 0;
+
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  line-height: 1;
+  letter-spacing: var(--heading-tracking);
+
+  color: #ffffff;
 }
 
 
@@ -83,11 +162,7 @@
 
   flex-wrap: wrap;
 
-  justify-content: center;
-
   gap: 8px;
-
-  margin-top: 28px;
 }
 
 .project-details-tag {
@@ -105,31 +180,11 @@
 
 
 /* =========================
-   Actions
-   ========================= */
-
-/* Buttons are now SpecularButton (see ProjectDetails.jsx) — this just
-   lays out the pair of them side by side. */
-.project-details-actions {
-  display: flex;
-
-  justify-content: center;
-
-  gap: 12px;
-
-  margin-top: 32px;
-}
-
-
-/* =========================
    Preview
    ========================= */
 
 .project-details-preview {
-  width: 100%;
-  max-width: 1100px;
-
-  margin: 80px auto 0;
+  margin-top: 64px;
 }
 
 .project-details-preview img {
@@ -148,10 +203,7 @@
    ========================= */
 
 .project-details-features {
-  width: 100%;
-  max-width: 900px;
-
-  margin: 100px auto 0;
+  margin-top: 80px;
 }
 
 .project-details-features h2,
@@ -163,16 +215,58 @@
   color: #ffffff;
 }
 
-.project-details-features ul {
-  margin: 0;
+.project-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 
-  padding-left: 24px;
+  gap: 16px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
 }
 
-.project-details-features li {
-  margin-bottom: 12px;
+.project-feature-card {
+  display: flex;
+  align-items: flex-start;
 
-  color: rgba(255, 255, 255, 0.65);
+  gap: 16px;
+
+  padding: 22px 24px;
+
+  background-color: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.project-feature-card:hover {
+  background-color: var(--card-bg-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.project-feature-index {
+  flex-shrink: 0;
+
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  color: rgba(255, 255, 255, 0.35);
+
+  /* optically line up with the first line of text */
+  line-height: 1.7;
+}
+
+.project-feature-card p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.7);
 
   line-height: 1.7;
 }
@@ -183,10 +277,7 @@
    ========================= */
 
 .project-screenshots {
-  width: 100%;
-  max-width: 1100px;
-
-  margin: 100px auto 0;
+  margin-top: 80px;
 }
 
 .project-screenshots-grid {
@@ -242,21 +333,28 @@
    Responsive
    ========================= */
 
+@media (max-width: 900px) {
+
+  .project-details-header {
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+  }
+}
+
+
 @media (max-width: 700px) {
 
-  .project-details-page {
-    padding: 120px 20px 80px;
-  }
-
   .project-details-preview {
-    margin-top: 60px;
+    margin-top: 48px;
   }
 
   .project-details-features,
   .project-screenshots {
-    margin-top: 70px;
+    margin-top: 60px;
   }
 
+  .project-features-grid,
   .project-screenshots-grid {
     grid-template-columns: 1fr;
   }

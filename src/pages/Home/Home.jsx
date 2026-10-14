@@ -1,15 +1,24 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { projects } from "../../data/projects";
+import { skills } from "../../data/skills";
 
 import Connect from "../../components/Connect/Connect";
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import SpecularButton from "../../components/SpecularButton/SpecularButton";
+import TypeWriter from "../../components/TypeWriter/TypeWriter";
 
 import "./Home.css";
+
+const FEATURED_COUNT = 2;
 
 function Home() {
   const navigate = useNavigate();
 
+  const featuredProjects = projects.slice(0, FEATURED_COUNT);
+
   return (
-    <main className="home-page">
+    <main className="page home-page">
 
       {/* =========================
           Hero Section
@@ -38,12 +47,15 @@ function Home() {
               Hi, I'm
             </p>
 
-            <h1 className="hero-name">
-              Mustansir Hariyanawala
+            <h1
+              className="hero-name"
+              aria-label="Mustansir Hariyanawala"
+            >
+              <TypeWriter text="Mustansir Hariyanawala" />
             </h1>
 
             <h2 className="hero-title">
-              Frontend Developer
+              Software <em>Developer</em>
             </h2>
 
             <p className="hero-description">
@@ -101,8 +113,66 @@ function Home() {
 
             </div>
 
+
+            {/* Tech stack */}
+
+            <div className="hero-stack">
+
+              <span className="hero-stack-label">
+                Tech I work with
+              </span>
+
+              <ul className="hero-stack-list">
+                {skills.map((skill) => (
+                  <li key={skill}>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+
+            </div>
+
           </div>
 
+        </div>
+
+      </section>
+
+
+      {/* =========================
+          Featured Projects
+          ========================= */}
+
+      <section className="home-section">
+
+        <div className="home-section-heading">
+
+          <div>
+            <p className="home-section-label">
+              Selected work
+            </p>
+
+            <h2 className="home-section-title">
+              Featured <em>Projects</em>
+            </h2>
+          </div>
+
+          <Link
+            to="/projects"
+            className="home-section-link"
+          >
+            All projects →
+          </Link>
+
+        </div>
+
+        <div className="home-projects-grid">
+          {featuredProjects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+            />
+          ))}
         </div>
 
       </section>

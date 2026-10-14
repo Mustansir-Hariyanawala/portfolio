@@ -2,15 +2,26 @@ import { useState } from "react";
 
 import { projects } from "../../data/projects";
 
+import PageHeader from "../../components/PageHeader/PageHeader";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
 
 import "./Projects.css";
 
+// Every technology used across all projects, for the filter chips.
+const allTechnologies = [
+  ...new Set(projects.flatMap((project) => project.technologies)),
+];
+
 function Projects() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeTechnology, setActiveTechnology] = useState(null);
 
   const filteredProjects = projects.filter((project) => {
+    if (activeTechnology && !project.technologies.includes(activeTechnology)) {
+      return false;
+    }
+
     const search = searchTerm.toLowerCase();
 
     const title = project.title.toLowerCase();
@@ -28,42 +39,56 @@ function Projects() {
   });
 
   return (
-    <main className="projects-page">
+    <main className="page projects-page">
 
-      {/* =========================
-          Header
-          ========================= */}
-
-      <section className="projects-header">
-
-        <p className="projects-label">
-          My work
-        </p>
-
-        <h1 className="projects-title">
-          Projects
-        </h1>
-
-        <p className="projects-subtitle">
-          A collection of projects I've built,
-          explored and learned from.
-        </p>
-
-      </section>
-
-
-      {/* =========================
-          Search
-          ========================= */}
-
-      <section className="projects-search">
-
+      <PageHeader
+        label="My work"
+        title="Projects"
+        subtitle="A collection of projects I've built, explored and learned from."
+      >
         <SearchBar
           value={searchTerm}
           onChange={setSearchTerm}
         />
 
-      </section>
+        <p className="projects-count">
+          Showing {filteredProjects.length} of {projects.length} projects
+        </p>
+      </PageHeader>
+
+
+      {/* =========================
+          Technology Filters
+          ========================= */}
+
+      <div
+        className="projects-filters"
+        role="group"
+        aria-label="Filter by technology"
+      >
+
+        <button
+          type="button"
+          className={`projects-filter ${activeTechnology === null ? "is-active" : ""}`}
+          aria-pressed={activeTechnology === null}
+          onClick={() => setActiveTechnology(null)}
+        >
+          All
+        </button>
+
+        {allTechnologies.map((technology) => (
+          <button
+            key={technology}
+            type="button"
+            className={`projects-filter ${activeTechnology === technology ? "is-active" : ""}`}
+            aria-pressed={activeTechnology === technology}
+            onClick={() => setActiveTechnology(technology)}
+          >
+            {technology}
+          </button>
+        ))}
+
+      </div>
 
 
       {/* =========================

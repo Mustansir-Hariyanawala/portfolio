@@ -1,20 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 /* =========================
    Fonts
    ========================= */
 
-/* Sora: geometric, slightly wide — used for headings so the big hero
-   name/titles have real presence instead of the browser default.
-   Inter: neutral, highly legible at small sizes — used for body copy,
-   labels, buttons. This heading/body pairing is a common portfolio combo
-   because the two families contrast in weight without clashing in style. */
+/* The palette is pure monochrome, so the type carries the personality:
+   - Instrument Serif: editorial display serif for headings, the hero name
+     and big numbers. Its italic is used for accent words (<em> in a
+     heading) — the contrast against the techy particle background is the
+     point.
+   - Inter: neutral and legible at small sizes — body copy, buttons, forms.
+   - JetBrains Mono: small labels, tags, dates and stat labels (see "Mono
+     roles" below), a nod to code that pairs with the typing cursor. */
 
 
 :root {
-  --font-heading: 'Sora', system-ui, sans-serif;
+  --font-heading: 'Instrument Serif', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Instrument Serif is a condensed face with no width axis, so the only
+     way to open it up is tracking. Raise toward 0.04em for an airier look,
+     lower toward 0 for the tighter original. */
+  --heading-tracking: 0.025em;
+
+  /* Card surfaces: solid, a few steps above the black page so cards read
+     as panels without competing with the content or the particles. The
+     slight cool tint keeps them from looking like flat grey boxes. */
+  --card-bg: #0c0c0f;
+  --card-bg-hover: #121216;
+  --card-bg-active: #141418;
+  --card-border: rgba(255, 255, 255, 0.09);
+  --card-border-hover: rgba(255, 255, 255, 0.18);
 }
 
 html {
@@ -38,7 +56,77 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  /* Negative tracking on display type is what makes big bold headings feel
-     "designed" rather than default-browser-stretched; tighter as size grows. */
-  letter-spacing: -0.02em;
+
+  /* Instrument Serif only ships weight 400; any bolder weight would make
+     the browser smear a fake bold, so headings stay regular and get their
+     presence from size instead. */
+  font-weight: 400;
+  font-synthesis: none;
+
+  letter-spacing: var(--heading-tracking);
+  word-spacing: 0.06em;
+}
+
+/* Italic accent words, e.g. <h2>Featured <em>Projects</em></h2> */
+h1 em,
+h2 em,
+h3 em {
+  font-style: italic;
+
+  color: rgba(255, 255, 255, 0.75);
+}
+
+
+/* =========================
+   Mono roles
+   ========================= */
+
+/* Every small label / tag / meta text that uses JetBrains Mono, kept in
+   one place so the mapping is easy to change. */
+.page-header-label,
+.home-section-label,
+.hero-stack-label,
+.connect-label,
+.project-details-label,
+.contact-item-label,
+.header-stats dt,
+.project-info-row h2,
+.experience-responsibilities h4,
+.experience-card-side h4,
+.project-tag,
+.technology-tag,
+.project-details-tag,
+.hero-stack-list li,
+.projects-filter,
+.current-badge,
+.experience-meta,
+.projects-count,
+.about-focus-index,
+.project-feature-index,
+.hero-greeting {
+  font-family: var(--font-mono);
+
+  letter-spacing: 0;
+}
+
+/* =========================
+   Page Shell
+   ========================= */
+
+/* Shared container for every page: same max width and side padding as
+   .navbar-container, so page content lines up with the nav above it.
+   Tailwind's preflight makes this border-box, so 1200px includes padding. */
+.page {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 128px 24px 100px;
+}
+
+@media (max-width: 700px) {
+
+  .page {
+    padding: 112px 20px 80px;
+  }
 }

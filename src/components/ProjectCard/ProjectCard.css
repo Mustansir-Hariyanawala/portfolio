@@ -2,14 +2,18 @@
    Project Card
    ========================= */
 
+/* Column flex so cards sharing a grid row stretch to equal height, with
+   the CTA pinned to the bottom (see .project-card-cta). */
 .project-card {
+  display: flex;
+  flex-direction: column;
+
   overflow: hidden;
 
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
 
-  background-color: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
+  background-color: var(--card-bg);
 
   transition:
     transform 0.25s ease,
@@ -22,7 +26,7 @@
   transform: translateY(-6px);
 
   border-color: rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--card-bg-hover);
 
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
@@ -38,7 +42,7 @@
   overflow: hidden;
 
   /* Faint bottom border so the image doesn't bleed straight into the
-     glass content panel below it when the thumbnail has a light edge. */
+     content panel below it when the thumbnail has a light edge. */
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -71,6 +75,10 @@
    ========================= */
 
 .project-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
   padding: 24px;
 }
 
@@ -137,5 +145,6 @@
 /* The link itself is now SpecularButton (see ProjectCard.jsx) — this
    just controls the spacing around it. */
 .project-card-cta {
-  margin-top: 22px;
+  margin-top: auto;
+  padding-top: 22px;
 }

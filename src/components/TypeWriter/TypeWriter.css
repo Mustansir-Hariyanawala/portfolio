@@ -1,0 +1,53 @@
+/* =========================
+   TypeWriter
+   ========================= */
+
+.typewriter-rest {
+  visibility: hidden;
+}
+
+/* Zero-width anchor so the cursor never changes where lines wrap; the
+   visible bar is drawn by ::after just to its right. */
+.typewriter-cursor {
+  position: relative;
+
+  display: inline-block;
+
+  width: 0;
+  height: 0.9em;
+
+  vertical-align: -0.08em;
+}
+
+.typewriter-cursor::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0.06em;
+
+  width: 0.07em;
+
+  background-color: currentColor;
+
+  animation: typewriter-blink 1s step-end infinite;
+}
+
+/* Solid while typing, like a real cursor; blinks once it's done. */
+.typewriter-cursor.is-typing::after {
+  animation: none;
+}
+
+@keyframes typewriter-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .typewriter-cursor::after {
+    animation: none;
+  }
+}

@@ -5,6 +5,10 @@ import PillNav from "./PillNav/PillNav";
 
 import "./Navbar.css";
 
+// Your logo. Drop your image into public/images/logo/ and point this at it
+// (e.g. "/images/logo/logo.png"). The current file is a placeholder "M".
+const LOGO_SRC = "/images/logo/logo.svg";
+
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
@@ -27,13 +31,16 @@ function Navbar() {
     <header className={`navbar ${isScrolled ? "navbar-scrolled" : ""}`}>
       <div className="navbar-container">
 
-        {/* Brand / logo — plain text, no particle/goo effect */}
-        <Link to="/" className="navbar-brand">
-          Your Name
+        {/* Logo — links home */}
+        <Link to="/" className="navbar-logo">
+          <img
+            src={LOGO_SRC}
+            alt="Home"
+          />
         </Link>
 
         {/* Real navigation — PillNav owns desktop pills + its own mobile menu.
-            hideLogo is set because navbar-brand already fills that slot. */}
+            hideLogo is set because .navbar-logo already fills that slot. */}
         <PillNav
           items={navItems}
           activeHref={location.pathname}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import PageHeader from "../../components/PageHeader/PageHeader";
 import SpecularButton from "../../components/SpecularButton/SpecularButton";
 
 import "./Contact.css";
@@ -35,28 +36,13 @@ function Contact() {
   };
 
   return (
-    <main className="contact-page">
+    <main className="page contact-page">
 
-      {/* =========================
-          Header
-          ========================= */}
-
-      <section className="contact-header">
-
-        <p className="contact-label">
-          Get in touch
-        </p>
-
-        <h1 className="contact-title">
-          Contact Me
-        </h1>
-
-        <p className="contact-subtitle">
-          Have a question, want to work together, or just
-          want to say hello? Feel free to reach out.
-        </p>
-
-      </section>
+      <PageHeader
+        label="Get in touch"
+        title={<>Contact <em>Me</em></>}
+        subtitle="Have a question, want to work together, or just want to say hello? Feel free to reach out."
+      />
 
 
       {/* =========================
@@ -80,55 +66,59 @@ function Contact() {
           </p>
 
 
-          {/* Email */}
+          <div className="contact-items">
 
-          <div className="contact-item">
+            {/* Email */}
 
-            <span className="contact-item-label">
-              Email
-            </span>
+            <div className="contact-item">
 
-            <a href="mailto:your@email.com">
-              your@email.com
-            </a>
+              <span className="contact-item-label">
+                Email
+              </span>
 
-          </div>
+              <a href="mailto:your@email.com">
+                your@email.com
+              </a>
 
-
-          {/* LinkedIn */}
-
-          <div className="contact-item">
-
-            <span className="contact-item-label">
-              LinkedIn
-            </span>
-
-            <a
-              href="https://linkedin.com/in/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              linkedin.com/in/yourusername
-            </a>
-
-          </div>
+            </div>
 
 
-          {/* GitHub */}
+            {/* LinkedIn */}
 
-          <div className="contact-item">
+            <div className="contact-item">
 
-            <span className="contact-item-label">
-              GitHub
-            </span>
+              <span className="contact-item-label">
+                LinkedIn
+              </span>
 
-            <a
-              href="https://github.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              github.com/yourusername
-            </a>
+              <a
+                href="https://linkedin.com/in/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                linkedin.com/in/yourusername
+              </a>
+
+            </div>
+
+
+            {/* GitHub */}
+
+            <div className="contact-item">
+
+              <span className="contact-item-label">
+                GitHub
+              </span>
+
+              <a
+                href="https://github.com/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                github.com/yourusername
+              </a>
+
+            </div>
 
           </div>
 
@@ -142,40 +132,44 @@ function Contact() {
           onSubmit={handleSubmit}
         >
 
-          <div className="form-group">
+          <div className="form-row">
 
-            <label htmlFor="name">
-              Name
-            </label>
+            <div className="form-group">
 
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Your name"
-              required
-            />
+              <label htmlFor="name">
+                Name
+              </label>
 
-          </div>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your name"
+                required
+              />
+
+            </div>
 
 
-          <div className="form-group">
+            <div className="form-group">
 
-            <label htmlFor="email">
-              Email
-            </label>
+              <label htmlFor="email">
+                Email
+              </label>
 
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="your@email.com"
-              required
-            />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="your@email.com"
+                required
+              />
+
+            </div>
 
           </div>
 

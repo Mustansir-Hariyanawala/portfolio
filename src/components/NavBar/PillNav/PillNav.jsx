@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 
@@ -119,6 +120,17 @@ const PillNav = ({
     return () => window.removeEventListener('resize', onResize);
   }, [items, ease, initialLoadAnimation]);
 
+  // Escape closes the mobile menu. Goes through the button so the close
+  // animation and state stay in one code path.
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const onKeyDown = e => {
+      if (e.key === 'Escape') hamburgerRef.current?.click();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isMobileMenuOpen]);
+
   const handleEnter = i => {
     const tl = tlRefs.current[i];
     if (!tl) return;
@@ -173,28 +185,56 @@ const PillNav = ({
     }
 
     if (menu) {
+      const rows = menu.querySelectorAll('.mobile-menu-item');
+      const instant =
+        window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+      // panel shape when collapsed into the menu button's corner
+      const folded = 'inset(0% 0% 100% 100% round 24px)';
+
+      gsap.killTweensOf([menu, ...rows]);
+
       if (newState) {
         gsap.set(menu, { visibility: 'visible' });
+
+        // panel unfolds out of the top-right corner, where the button is
         gsap.fromTo(
           menu,
-          { opacity: 0, y: 10, scaleY: 1 },
+          { opacity: 0, clipPath: folded },
           {
             opacity: 1,
-            y: 0,
-            scaleY: 1,
-            duration: 0.3,
-            ease,
-            transformOrigin: 'top center'
+            clipPath: 'inset(0% 0% 0% 0% round 24px)',
+            duration: instant ? 0 : 0.45,
+            ease: 'power3.out'
+          }
+        );
+
+        // then the rows slide in one after another
+        gsap.fromTo(
+          rows,
+          { opacity: 0, x: 24 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: instant ? 0 : 0.4,
+            ease: 'power3.out',
+            stagger: instant ? 0 : 0.06,
+            delay: instant ? 0 : 0.12
           }
         );
       } else {
+        gsap.to(rows, {
+          opacity: 0,
+          x: 12,
+          duration: instant ? 0 : 0.15,
+          stagger: { each: instant ? 0 : 0.03, from: 'end' }
+        });
+
         gsap.to(menu, {
           opacity: 0,
-          y: 10,
-          scaleY: 1,
-          duration: 0.2,
-          ease,
-          transformOrigin: 'top center',
+          clipPath: folded,
+          duration: instant ? 0 : 0.3,
+          delay: instant ? 0 : 0.08,
+          ease: 'power3.in',
           onComplete: () => {
             gsap.set(menu, { visibility: 'hidden' });
           }
@@ -203,6 +243,12 @@ const PillNav = ({
     }
 
     onMobileMenuClick?.();
+  };
+
+  // Links in the mobile menu must run the full close animation, not just
+  // flip the state flag, or the menu stays visible after navigating.
+  const closeMobileMenu = () => {
+    if (isMobileMenuOpen) toggleMobileMenu();
   };
 
   const isExternalLink = href =>
@@ -230,10 +276,11 @@ const PillNav = ({
     // NOTE: was `absolute top-[1em] z-[1000] w-full left-0 md:w-auto md:left-auto`.
     // Changed to `relative` because the parent <header> (Navbar.jsx) already
     // owns fixed positioning + z-index for the whole bar; PillNav just needs
-    // to flow normally inside it now.
-    <div className="relative w-full md:w-auto">
+    // to flow normally inside it now. justify-self-center puts it in the
+    // middle of .navbar-container's grid on desktop.
+    <div className="relative w-full md:w-auto justify-self-end md:justify-self-center">
       <nav
-        className={`w-full md:w-max flex items-center justify-between md:justify-start box-border px-4 md:px-0 ${className}`}
+        className={`w-full md:w-max flex items-center justify-end md:justify-center box-border ${className}`}
         aria-label="Primary"
         style={cssVars}
       >
@@ -278,7 +325,7 @@ const PillNav = ({
 
         <div
           ref={navItemsRef}
-          className="relative items-center rounded-full hidden md:flex ml-2"
+          className="relative items-center rounded-full hidden md:flex"
           style={{
             height: 'var(--nav-h)',
             background: 'var(--base, #000)'
@@ -399,55 +446,49 @@ const PillNav = ({
         </button>
       </nav>
 
+      {/* Mobile menu — styles in NavBar/Navbar.css (.mobile-menu-*) */}
       <div
         ref={mobileMenuRef}
-        className="md:hidden absolute top-[3em] left-4 right-4 rounded-[27px] shadow-[0_8px_32px_rgba(0,0,0,0.12)] z-[998] origin-top"
-        style={{
-          ...cssVars,
-          background: 'var(--base, #f0f0f0)'
-        }}
+        className="mobile-menu md:hidden"
+        style={cssVars}
       >
-        <ul className="list-none m-0 p-[3px] flex flex-col gap-[3px]">
-          {items.map(item => {
-            const defaultStyle = {
-              background: 'var(--pill-bg, #fff)',
-              color: 'var(--pill-text, #fff)'
-            };
-            const hoverIn = e => {
-              e.currentTarget.style.background = 'var(--base)';
-              e.currentTarget.style.color = 'var(--hover-text, #fff)';
-            };
-            const hoverOut = e => {
-              e.currentTarget.style.background = 'var(--pill-bg, #fff)';
-              e.currentTarget.style.color = 'var(--pill-text, #fff)';
+        <p className="mobile-menu-label">
+          Navigate
+        </p>
+
+        <ul className="mobile-menu-list">
+          {items.map((item, i) => {
+            const isActive = activeHref === item.href;
+
+            const linkProps = {
+              className: `mobile-menu-link ${isActive ? 'is-active' : ''}`,
+              'aria-current': isActive ? 'page' : undefined,
+              onClick: closeMobileMenu
             };
 
-            const linkClasses =
-              'block py-3 px-4 text-[16px] font-medium rounded-[50px] transition-all duration-200 ease-[cubic-bezier(0.25,0.1,0.25,1)]';
+            const content = (
+              <>
+                <span className="mobile-menu-index">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="mobile-menu-text">
+                  {item.label}
+                </span>
+                <span className="mobile-menu-arrow" aria-hidden="true">
+                  →
+                </span>
+              </>
+            );
 
             return (
-              <li key={item.href}>
+              <li key={item.href} className="mobile-menu-item">
                 {isRouterLink(item.href) ? (
-                  <Link
-                    to={item.href}
-                    className={linkClasses}
-                    style={defaultStyle}
-                    onMouseEnter={hoverIn}
-                    onMouseLeave={hoverOut}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
+                  <Link to={item.href} {...linkProps}>
+                    {content}
                   </Link>
                 ) : (
-                  <a
-                    href={item.href}
-                    className={linkClasses}
-                    style={defaultStyle}
-                    onMouseEnter={hoverIn}
-                    onMouseLeave={hoverOut}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
+                  <a href={item.href} {...linkProps}>
+                    {content}
                   </a>
                 )}
               </li>
@@ -455,6 +496,18 @@ const PillNav = ({
           })}
         </ul>
       </div>
+
+      {/* Dims and blurs the page behind the open menu; tap it to close.
+          Portalled to <body> because the scrolled navbar has a
+          backdrop-filter, which would trap a fixed child inside the bar. */}
+      {createPortal(
+        <div
+          className={`mobile-menu-backdrop ${isMobileMenuOpen ? 'is-open' : ''}`}
+          onClick={closeMobileMenu}
+          aria-hidden="true"
+        />,
+        document.body
+      )}
     </div>
   );
 };

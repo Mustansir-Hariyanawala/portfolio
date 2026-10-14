@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import NeuralBackground from "./components/NeuralBackground/NeuralBackground";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/NavBar/Navbar";
 
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";

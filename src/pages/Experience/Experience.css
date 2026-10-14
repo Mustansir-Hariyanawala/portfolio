@@ -1,63 +1,4 @@
 /* =========================
-   Experience Page
-   ========================= */
-
-.experience-page {
-  width: 100%;
-
-  padding: 140px 24px 100px;
-}
-
-
-/* =========================
-   Header
-   ========================= */
-
-.experience-header {
-  width: 100%;
-  max-width: 800px;
-
-  margin: 0 auto;
-
-  text-align: center;
-}
-
-.experience-label {
-  margin: 0 0 10px;
-
-  font-size: 0.85rem;
-  font-weight: 600;
-
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.experience-title {
-  margin: 0;
-
-  font-size: clamp(3rem, 7vw, 5rem);
-  line-height: 1;
-
-  font-weight: 800;
-
-  color: #ffffff;
-}
-
-.experience-subtitle {
-  max-width: 650px;
-
-  margin: 24px auto 0;
-
-  color: rgba(255, 255, 255, 0.55);
-
-  font-size: 1.1rem;
-  line-height: 1.7;
-}
-
-
-/* =========================
    Timeline
    ========================= */
 
@@ -65,9 +6,8 @@
   position: relative;
 
   width: 100%;
-  max-width: 1000px;
 
-  margin: 100px auto 0;
+  margin-top: 56px;
 }
 
 
@@ -182,8 +122,7 @@
 .experience-card {
   padding: 32px;
 
-  background-color: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
+  background-color: var(--card-bg);
 
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
@@ -198,7 +137,7 @@
 .experience-card:hover {
   transform: translateY(-4px);
 
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--card-bg-hover);
   border-color: rgba(255, 255, 255, 0.18);
 
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
@@ -208,7 +147,7 @@
    "active" even without comparing marker dots side by side. */
 .experience-item.is-current .experience-card {
   border-color: rgba(255, 255, 255, 0.22);
-  background-color: rgba(255, 255, 255, 0.045);
+  background-color: var(--card-bg-active);
 }
 
 
@@ -286,11 +225,44 @@
 
 
 /* =========================
+   Card Body
+   ========================= */
+
+/* Two columns so wide cards don't leave the right half empty: details
+   on the left, a divided-off "Tech used" panel on the right. */
+.experience-card-body {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+
+  gap: 36px;
+
+  margin-top: 24px;
+  padding-top: 24px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.experience-card-side {
+  padding-left: 32px;
+
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.experience-card-side h4 {
+  margin: 0 0 12px;
+
+  font-size: 0.95rem;
+
+  color: #ffffff;
+}
+
+
+/* =========================
    Description
    ========================= */
 
 .experience-description {
-  margin: 24px 0 0;
+  margin: 0;
 
   color: rgba(255, 255, 255, 0.65);
 
@@ -343,8 +315,6 @@
   flex-wrap: wrap;
 
   gap: 8px;
-
-  margin-top: 28px;
 }
 
 .technology-tag {
@@ -377,14 +347,26 @@
    Responsive
    ========================= */
 
-@media (max-width: 700px) {
+@media (max-width: 860px) {
 
-  .experience-page {
-    padding: 120px 20px 80px;
+  .experience-card-body {
+    grid-template-columns: 1fr;
+
+    gap: 24px;
   }
 
+  .experience-card-side {
+    padding-left: 0;
+
+    border-left: none;
+  }
+}
+
+
+@media (max-width: 700px) {
+
   .experience-timeline {
-    margin-top: 60px;
+    margin-top: 40px;
   }
 
   .experience-timeline::before {

@@ -1,8 +1,8 @@
 export const projects = [
   {
-    id: "weather-app",
+    id: "fraudulent-checkout",
 
-    title: "Weather App",
+    title: "Fraudulent Checkout Analysis Dashboard",
 
     shortDescription:
       "A responsive weather app that shows real-time conditions and a 5-day forecast for any city, with clean data visualization and no clutter.",
@@ -11,7 +11,7 @@ export const projects = [
       "This project started as a way to practice working with a public REST API in React. It fetches live weather data from the OpenWeather API based on a city search, and displays current conditions alongside a 5-day forecast broken down by time of day. The main challenge was handling the API's inconsistent response shapes for different endpoints (current weather vs. forecast) and normalizing them into a single shape the UI could render predictably. I also added debounced search-as-you-type, loading skeletons instead of a blank screen during fetches, and graceful error states for invalid city names or network failures — the kind of details that are easy to skip in a tutorial project but matter in anything meant to feel finished.",
 
     thumbnail:
-      "/images/projects/weather-app/thumbnail.png",
+      "/images/projects/Fraudulent-Analysis-Dashboard/screenshot-1.png",
 
     technologies: [
       "React",
@@ -21,14 +21,14 @@ export const projects = [
     ],
 
     github:
-      "https://github.com/yourusername/weather-app",
+      "https://github.com/Mustansir-Hariyanawala/FraudAnalysisDashboard",
 
     liveDemo:
-      "https://your-weather-app.com",
+      "https://fraudulent-checkout-frontend.vercel.app/",
 
     screenshots: [
-      "/images/projects/weather-app/screenshot-1.png",
-      "/images/projects/weather-app/screenshot-2.png",
+      "/images/projects/Fraudulent-Analysis-Dashboard/screenshot-1.png",
+      "/images/projects/Fraudulent-Analysis-Dashboard/screenshot-1.jpeg",
     ],
 
     features: [

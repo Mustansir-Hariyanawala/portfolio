@@ -15,7 +15,7 @@ function ProjectDetails() {
   // Project doesn't exist
   if (!project) {
     return (
-      <main className="project-details-page">
+      <main className="page project-details-page">
         <div className="project-not-found">
 
           <h1>
@@ -32,96 +32,154 @@ function ProjectDetails() {
   }
 
   return (
-    <main className="project-details-page">
+    <main className="page project-details-page">
+
+      <Link
+        to="/projects"
+        className="project-back-link"
+      >
+        ← Back to Projects
+      </Link>
+
 
       {/* =========================
-          Header
+          Header — intro on the left, project info card on the right
           ========================= */}
 
       <section className="project-details-header">
 
-        <Link
-          to="/projects"
-          className="project-back-link"
-        >
-          ← Back to Projects
-        </Link>
+        <div className="project-details-intro">
 
-        <p className="project-details-label">
-          Project
-        </p>
+          <p className="project-details-label">
+            Project
+          </p>
 
-        <h1>
-          {project.title}
-        </h1>
+          <h1>
+            {project.title}
+          </h1>
 
-        <p className="project-details-description">
-          {project.description}
-        </p>
+          <p className="project-details-description">
+            {project.description}
+          </p>
 
 
-        {/* Technologies */}
+          {/* Links — SpecularButton instead of plain <a> tags, opened via
+              window.open since SpecularButton renders a <button> */}
 
-        <div className="project-details-technologies">
+          <div className="project-details-actions">
 
-          {project.technologies.map((technology) => (
-            <span
-              key={technology}
-              className="project-details-tag"
+            <SpecularButton
+              size="md"
+              radius={999}
+              tint="#ffffff"
+              tintOpacity={1}
+              textColor="#000000"
+              lineColor="#ffffff"
+              baseColor="#e5e5e5"
+              intensity={1}
+              shineSize={14}
+              shineFade={45}
+              thickness={1.2}
+              speed={0.4}
+              followMouse
+              proximity={260}
+              onClick={() => window.open(project.liveDemo, "_blank", "noopener,noreferrer")}
             >
-              {technology}
-            </span>
-          ))}
+              Live Demo
+            </SpecularButton>
+
+            <SpecularButton
+              size="md"
+              radius={999}
+              tint="#ffffff"
+              tintOpacity={0}
+              textColor="#f5f5f5"
+              lineColor="#ffffff"
+              baseColor="#525252"
+              intensity={1}
+              shineSize={10}
+              shineFade={40}
+              thickness={1}
+              speed={0.35}
+              followMouse
+              proximity={250}
+              onClick={() => window.open(project.github, "_blank", "noopener,noreferrer")}
+            >
+              GitHub
+            </SpecularButton>
+
+          </div>
 
         </div>
 
 
-        {/* Links — SpecularButton instead of plain <a> tags, opened via
-            window.open since SpecularButton renders a <button> */}
+        {/* Project Info */}
 
-        <div className="project-details-actions">
+        <aside className="project-info-card">
 
-          <SpecularButton
-            size="md"
-            radius={999}
-            tint="#ffffff"
-            tintOpacity={1}
-            textColor="#000000"
-            lineColor="#ffffff"
-            baseColor="#e5e5e5"
-            intensity={1}
-            shineSize={14}
-            shineFade={45}
-            thickness={1.2}
-            speed={0.4}
-            followMouse
-            proximity={260}
-            onClick={() => window.open(project.liveDemo, "_blank", "noopener,noreferrer")}
-          >
-            Live Demo
-          </SpecularButton>
+          <div className="project-info-row">
 
-          <SpecularButton
-            size="md"
-            radius={999}
-            tint="#ffffff"
-            tintOpacity={0}
-            textColor="#f5f5f5"
-            lineColor="#ffffff"
-            baseColor="#525252"
-            intensity={1}
-            shineSize={10}
-            shineFade={40}
-            thickness={1}
-            speed={0.35}
-            followMouse
-            proximity={250}
-            onClick={() => window.open(project.github, "_blank", "noopener,noreferrer")}
-          >
-            GitHub
-          </SpecularButton>
+            <h2>
+              Tech stack
+            </h2>
 
-        </div>
+            <div className="project-details-technologies">
+              {project.technologies.map((technology) => (
+                <span
+                  key={technology}
+                  className="project-details-tag"
+                >
+                  {technology}
+                </span>
+              ))}
+            </div>
+
+          </div>
+
+
+          <div className="project-info-row">
+
+            <h2>
+              Links
+            </h2>
+
+            <ul className="project-info-links">
+              <li>
+                <a
+                  href={project.liveDemo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Live demo ↗
+                </a>
+              </li>
+              <li>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Source code ↗
+                </a>
+              </li>
+            </ul>
+
+          </div>
+
+
+          <div className="project-info-row">
+
+            <h2>
+              Features
+            </h2>
+
+            <p className="project-info-value">
+              {project.features.length}
+            </p>
+
+          </div>
+
+        </aside>
 
       </section>
 
@@ -150,10 +208,19 @@ function ProjectDetails() {
           Features
         </h2>
 
-        <ul>
+        <ul className="project-features-grid">
           {project.features.map((feature, index) => (
-            <li key={index}>
-              {feature}
+            <li
+              key={index}
+              className="project-feature-card"
+            >
+              <span className="project-feature-index">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <p>
+                {feature}
+              </p>
             </li>
           ))}
         </ul>

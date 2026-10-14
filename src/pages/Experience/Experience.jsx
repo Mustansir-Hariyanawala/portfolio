@@ -1,3 +1,5 @@
+import PageHeader from "../../components/PageHeader/PageHeader";
+
 import "./Experience.css";
 
 const experiences = [
@@ -50,30 +52,36 @@ const experiences = [
   },
 ];
 
+// Listed newest first, so the last entry is where the timeline starts.
+const technologyCount = new Set(
+  experiences.flatMap((experience) => experience.technologies)
+).size;
+const earliestStart = experiences[experiences.length - 1].startDate;
+
 function Experience() {
   return (
-    <main className="experience-page">
+    <main className="page experience-page">
 
-      {/* =========================
-          Header
-          ========================= */}
-
-      <section className="experience-header">
-
-        <p className="experience-label">
-          My journey
-        </p>
-
-        <h1 className="experience-title">
-          Experience
-        </h1>
-
-        <p className="experience-subtitle">
-          A timeline of my professional and
-          development experience.
-        </p>
-
-      </section>
+      <PageHeader
+        label="My journey"
+        title="Experience"
+        subtitle="A timeline of my professional and development experience."
+      >
+        <dl className="header-stats">
+          <div>
+            <dt>Roles</dt>
+            <dd>{experiences.length}</dd>
+          </div>
+          <div>
+            <dt>Technologies</dt>
+            <dd>{technologyCount}</dd>
+          </div>
+          <div>
+            <dt>Since</dt>
+            <dd>{earliestStart}</dd>
+          </div>
+        </dl>
+      </PageHeader>
 
 
       {/* =========================
@@ -143,48 +151,57 @@ function Experience() {
                 </div>
 
 
-                {/* Description */}
+                {/* Body — details on the left, tech on the right */}
 
-                <p className="experience-description">
-                  {experience.description}
-                </p>
+                <div className="experience-card-body">
+
+                  <div className="experience-card-main">
+
+                    <p className="experience-description">
+                      {experience.description}
+                    </p>
+
+                    <div className="experience-responsibilities">
+
+                      <h4>
+                        Responsibilities
+                      </h4>
+
+                      <ul>
+                        {experience.responsibilities.map(
+                          (responsibility, index) => (
+                            <li key={index}>
+                              {responsibility}
+                            </li>
+                          )
+                        )}
+                      </ul>
+
+                    </div>
+
+                  </div>
 
 
-                {/* Responsibilities */}
+                  <aside className="experience-card-side">
 
-                <div className="experience-responsibilities">
+                    <h4>
+                      Tech used
+                    </h4>
 
-                  <h4>
-                    Responsibilities
-                  </h4>
+                    <div className="experience-technologies">
+                      {experience.technologies.map(
+                        (technology) => (
+                          <span
+                            key={technology}
+                            className="technology-tag"
+                          >
+                            {technology}
+                          </span>
+                        )
+                      )}
+                    </div>
 
-                  <ul>
-                    {experience.responsibilities.map(
-                      (responsibility, index) => (
-                        <li key={index}>
-                          {responsibility}
-                        </li>
-                      )
-                    )}
-                  </ul>
-
-                </div>
-
-
-                {/* Technologies */}
-
-                <div className="experience-technologies">
-
-                  {experience.technologies.map(
-                    (technology) => (
-                      <span
-                        key={technology}
-                        className="technology-tag"
-                      >
-                        {technology}
-                      </span>
-                    )
-                  )}
+                  </aside>
 
                 </div>
 

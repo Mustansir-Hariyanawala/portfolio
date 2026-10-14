@@ -1,48 +1,45 @@
+import { skills } from "../../data/skills";
+
+import PageHeader from "../../components/PageHeader/PageHeader";
+
 import "./About.css";
 
-const skills = [
-  "React",
-  "JavaScript",
-  "HTML",
-  "CSS",
-  "Tailwind CSS",
-  "Git",
-  "GitHub",
+const focusAreas = [
+  {
+    title: "Frontend Development",
+    description:
+      "Building responsive and interactive interfaces using modern web technologies.",
+  },
+  {
+    title: "Problem Solving",
+    description:
+      "Breaking down problems into smaller, practical and maintainable solutions.",
+  },
+  {
+    title: "Continuous Learning",
+    description:
+      "Exploring new technologies and improving my development skills through projects.",
+  },
 ];
 
 function About() {
   return (
-    <main className="about-page">
+    <main className="page about-page">
 
-      {/* =========================
-          About Header
-          ========================= */}
-
-      <section className="about-header">
-
-        <p className="about-label">
-          Get to know me
-        </p>
-
-        <h1 className="about-title">
-          About Me
-        </h1>
-
-        <p className="about-subtitle">
-          A little bit about who I am, what I do,
-          and what I'm interested in.
-        </p>
-
-      </section>
+      <PageHeader
+        label="Get to know me"
+        title={<>About <em>Me</em></>}
+        subtitle="A little bit about who I am, what I do, and what I'm interested in."
+      />
 
 
       {/* =========================
-          About Content
+          Bento Grid
           ========================= */}
 
-      <section className="about-content">
+      <section className="about-grid">
 
-        {/* About Me */}
+        {/* Who I am — wide card */}
 
         <div className="about-card about-introduction">
 
@@ -71,91 +68,62 @@ function About() {
         </div>
 
 
-        {/* What I Do */}
+        {/* Portrait */}
 
-        <div className="about-card about-focus">
-
-          <h2>
-            What I do
-          </h2>
-
-          <div className="focus-list">
-
-            <div className="focus-item">
-              <h3>
-                Frontend Development
-              </h3>
-
-              <p>
-                Building responsive and interactive
-                interfaces using modern web technologies.
-              </p>
-            </div>
+        <div className="about-card about-portrait">
+          <img
+            src="/images/profile/profile.jpg"
+            alt="Mustansir Hariyanawala"
+          />
+        </div>
 
 
-            <div className="focus-item">
-              <h3>
-                Problem Solving
-              </h3>
+        {/* What I do — one card per focus area */}
 
-              <p>
-                Breaking down problems into smaller,
-                practical and maintainable solutions.
-              </p>
-            </div>
+        {focusAreas.map((area, index) => (
+          <div
+            key={area.title}
+            className="about-card about-focus"
+          >
+            <span className="about-focus-index">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+
+            <h3>
+              {area.title}
+            </h3>
+
+            <p>
+              {area.description}
+            </p>
+          </div>
+        ))}
 
 
-            <div className="focus-item">
-              <h3>
-                Continuous Learning
-              </h3>
+        {/* Tech stack — full-width card */}
 
-              <p>
-                Exploring new technologies and improving
-                my development skills through projects.
-              </p>
-            </div>
+        <div className="about-card about-skills">
 
+          <div className="about-skills-header">
+            <h2>
+              My Tech <em>Stack</em>
+            </h2>
+
+            <p>
+              Technologies and tools I currently work with.
+            </p>
           </div>
 
-        </div>
-
-      </section>
-
-
-      {/* =========================
-          Skills
-          ========================= */}
-
-      <section className="skills-section">
-
-        <div className="skills-header">
-
-          <p className="about-label">
-            Technologies
-          </p>
-
-          <h2>
-            My Tech Stack
-          </h2>
-
-          <p>
-            Technologies and tools I currently work with.
-          </p>
-
-        </div>
-
-
-        <div className="skills-grid">
-
-          {skills.map((skill) => (
-            <div
-              key={skill}
-              className="skill-card"
-            >
-              {skill}
-            </div>
-          ))}
+          <div className="skills-grid">
+            {skills.map((skill) => (
+              <div
+                key={skill}
+                className="skill-card"
+              >
+                {skill}
+              </div>
+            ))}
+          </div>
 
         </div>
 

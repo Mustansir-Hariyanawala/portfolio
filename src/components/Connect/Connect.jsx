@@ -25,7 +25,7 @@ function Connect() {
           </p>
 
           <h2 className="connect-title">
-            Want to get in touch?
+            Want to get in <em>touch?</em>
           </h2>
 
           <p className="connect-description">

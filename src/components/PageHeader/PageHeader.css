@@ -1,0 +1,122 @@
+/* =========================
+   Page Header
+   ========================= */
+
+.page-header {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  gap: 40px;
+
+  padding-bottom: 48px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.page-header--with-aside {
+  grid-template-columns: 1.3fr 1fr;
+
+  /* bottom-align so the aside lines up with the subtitle, not the label */
+  align-items: end;
+}
+
+.page-header-label {
+  margin: 0 0 12px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.page-header-title {
+  margin: 0;
+
+  /* serif display reads smaller than a sans at the same size, so this
+     runs a little larger */
+  font-size: clamp(3.2rem, 7.5vw, 5.75rem);
+  line-height: 1.05;
+
+  color: #ffffff;
+}
+
+.page-header-subtitle {
+  max-width: 560px;
+
+  margin: 24px 0 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   Header Stats
+   ========================= */
+
+/* Reusable stat row for the aside slot, e.g.
+   <dl className="header-stats"><div><dt>Label</dt><dd>2</dd></div></dl> */
+.header-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+
+  gap: 12px;
+
+  margin: 0;
+}
+
+.header-stats > div {
+  padding: 18px 20px;
+
+  background-color: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.header-stats dt {
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.header-stats dd {
+  margin: 8px 0 0;
+
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  line-height: 1;
+  letter-spacing: var(--heading-tracking);
+
+  color: #ffffff;
+}
+
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 860px) {
+
+  .page-header--with-aside {
+    grid-template-columns: 1fr;
+
+    gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .page-header {
+    padding-bottom: 36px;
+  }
+}
