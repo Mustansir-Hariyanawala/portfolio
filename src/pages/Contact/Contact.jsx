@@ -1,17 +1,51 @@
 import { useState } from "react";
 
+import { displayUrl, profile } from "../../data/profile";
+
 import PageHeader from "../../components/PageHeader/PageHeader";
 import SpecularButton from "../../components/SpecularButton/SpecularButton";
 
 import "./Contact.css";
 
+const contactLinks = [
+  {
+    label: "Email",
+    href: `mailto:${profile.email}`,
+    text: profile.email,
+  },
+  {
+    label: "LinkedIn",
+    href: profile.linkedin,
+    text: displayUrl(profile.linkedin),
+    external: true,
+  },
+  {
+    label: "GitHub",
+    href: profile.github,
+    text: displayUrl(profile.github),
+    external: true,
+  },
+];
+
+// Some mail apps cut off mailto: links past ~2,000 characters.
+const MESSAGE_MAX_LENGTH = 1500;
+
+// There's no backend: submitting opens the visitor's own email app with the
+// message filled in and addressed to profile.email.
+function buildMailto({ name, subject, message }) {
+  const body = `${message}\n\n— ${name}`;
+
+  return `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     subject: "",
     message: "",
   });
+
+  const [opened, setOpened] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -25,14 +59,9 @@ function Contact() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Contact form submitted:", formData);
+    window.location.href = buildMailto(formData);
 
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+    setOpened(true);
   };
 
   return (
@@ -40,7 +69,8 @@ function Contact() {
 
       <PageHeader
         label="Get in touch"
-        title={<>Contact <em>Me</em></>}
+        title="Contact"
+        titleAccent="Me"
         subtitle="Have a question, want to work together, or just want to say hello? Feel free to reach out."
       />
 
@@ -67,59 +97,28 @@ function Contact() {
 
 
           <div className="contact-items">
-
-            {/* Email */}
-
-            <div className="contact-item">
-
-              <span className="contact-item-label">
-                Email
-              </span>
-
-              <a href="mailto:your@email.com">
-                your@email.com
-              </a>
-
-            </div>
-
-
-            {/* LinkedIn */}
-
-            <div className="contact-item">
-
-              <span className="contact-item-label">
-                LinkedIn
-              </span>
-
-              <a
-                href="https://linkedin.com/in/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
+            {contactLinks.map((link) => (
+              <div
+                key={link.label}
+                className="contact-item"
               >
-                linkedin.com/in/yourusername
-              </a>
 
-            </div>
+                <span className="contact-item-label">
+                  {link.label}
+                </span>
 
+                <a
+                  href={link.href}
+                  {...(link.external && {
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  })}
+                >
+                  {link.text}
+                </a>
 
-            {/* GitHub */}
-
-            <div className="contact-item">
-
-              <span className="contact-item-label">
-                GitHub
-              </span>
-
-              <a
-                href="https://github.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                github.com/yourusername
-              </a>
-
-            </div>
-
+              </div>
+            ))}
           </div>
 
         </div>
@@ -147,6 +146,7 @@ function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Your name"
+                maxLength={100}
                 required
               />
 
@@ -155,40 +155,22 @@ function Contact() {
 
             <div className="form-group">
 
-              <label htmlFor="email">
-                Email
+              <label htmlFor="subject">
+                Subject
               </label>
 
               <input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
+                id="subject"
+                name="subject"
+                type="text"
+                value={formData.subject}
                 onChange={handleChange}
-                placeholder="your@email.com"
+                placeholder="What's this about?"
+                maxLength={150}
                 required
               />
 
             </div>
-
-          </div>
-
-
-          <div className="form-group">
-
-            <label htmlFor="subject">
-              Subject
-            </label>
-
-            <input
-              id="subject"
-              name="subject"
-              type="text"
-              value={formData.subject}
-              onChange={handleChange}
-              placeholder="What would you like to talk about?"
-              required
-            />
 
           </div>
 
@@ -205,6 +187,7 @@ function Contact() {
               value={formData.message}
               onChange={handleChange}
               placeholder="Write your message..."
+              maxLength={MESSAGE_MAX_LENGTH}
               rows="6"
               required
             />
@@ -233,6 +216,19 @@ function Contact() {
               Send Message
             </SpecularButton>
           </div>
+
+          <p
+            className="form-status"
+            role="status"
+          >
+            {opened && (
+              <>
+                Your email app should now be open with the message ready
+                to send. Nothing opened? Email me at{" "}
+                <a href={`mailto:${profile.email}`}>{profile.email}</a>.
+              </>
+            )}
+          </p>
 
         </form>
 

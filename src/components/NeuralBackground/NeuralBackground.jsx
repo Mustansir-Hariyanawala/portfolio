@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 
+import "./NeuralBackground.css";
+
 /**
  * NeuralBackground
  * -----------------
@@ -15,6 +17,11 @@ import { useEffect, useRef } from "react";
  * outside <Routes>) so it survives route changes without unmounting.
  * Pointer events are read from `window` because the canvas sits behind
  * the page with pointer-events disabled.
+ *
+ * Props:
+ *   pushOnClick  true: every click spawns PUSH_COUNT particles (capped at
+ *                MAX_PUSHED extra, oldest removed first). false: clicks do
+ *                nothing. Defaults to PUSH_ON_CLICK.
  */
 
 // ---- tune these to change the look/feel (defaults = particles.js demo) ----
@@ -34,8 +41,11 @@ const MOVE_SPEED = 6;
 
 const REPULSE_ON_HOVER = true;
 const REPULSE_DISTANCE = 200; // px
-const PUSH_ON_CLICK = true;
+const PUSH_ON_CLICK = true; // default for the pushOnClick prop
 const PUSH_COUNT = 4; // particles spawned per click
+// Most extra particles clicks can add. Linking is O(n²), so without a cap
+// every click made each frame slower.
+const MAX_PUSHED = 24;
 
 function createParticle(width, height, position) {
   const radius = (PARTICLE_SIZE_RANDOM ? Math.random() : 1) * PARTICLE_SIZE;
@@ -58,7 +68,7 @@ function createParticle(width, height, position) {
   };
 }
 
-export default function NeuralBackground() {
+export default function NeuralBackground({ pushOnClick = PUSH_ON_CLICK }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -68,6 +78,7 @@ export default function NeuralBackground() {
     let width = 0;
     let height = 0;
     let particles = [];
+    let baseCount = 0; // density-based count, before click-pushes
     let mouse = { x: 0, y: 0, active: false };
     let rafId = null;
 
@@ -75,6 +86,7 @@ export default function NeuralBackground() {
     // removing particles as needed (also undoes click-pushes on resize).
     function matchDensity() {
       const target = Math.round(((width * height) / 1000) * (PARTICLE_COUNT / DENSITY_AREA));
+      baseCount = target;
       while (particles.length < target) particles.push(createParticle(width, height));
       if (particles.length > target) particles.splice(0, particles.length - target);
     }
@@ -105,13 +117,17 @@ export default function NeuralBackground() {
       for (let i = 0; i < PUSH_COUNT; i++) {
         particles.push(createParticle(width, height, { x: e.clientX, y: e.clientY }));
       }
+
+      // Over the cap: drop the oldest particles so the total stays bounded.
+      const excess = particles.length - (baseCount + MAX_PUSHED);
+      if (excess > 0) particles.splice(0, excess);
     }
 
     resize();
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", handlePointerMove);
     document.addEventListener("mouseleave", handlePointerLeave);
-    if (PUSH_ON_CLICK) window.addEventListener("click", handleClick);
+    if (pushOnClick) window.addEventListener("click", handleClick);
 
     function repulse(p) {
       const dx = p.x - mouse.x;
@@ -128,6 +144,8 @@ export default function NeuralBackground() {
     function link(p1, p2) {
       const dx = p1.x - p2.x;
       const dy = p1.y - p2.y;
+      // Cheap rejection first: most pairs are far apart.
+      if (Math.abs(dx) > LINK_DISTANCE || Math.abs(dy) > LINK_DISTANCE) return;
       const dist = Math.sqrt(dx * dx + dy * dy);
       if (dist > LINK_DISTANCE) return;
 
@@ -197,12 +215,12 @@ export default function NeuralBackground() {
       document.removeEventListener("mouseleave", handlePointerLeave);
       window.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [pushOnClick]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 -z-10 pointer-events-none"
+      className="neural-background"
       aria-hidden="true"
     />
   );

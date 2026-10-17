@@ -33,11 +33,11 @@
   width: 100%;
 
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: 1fr 1fr;
 
   align-items: center;
 
-  gap: 64px;
+  gap: 56px;
 }
 
 
@@ -52,7 +52,7 @@
 }
 
 .hero-image {
-  width: min(460px, 100%);
+  width: min(540px, 100%);
 
   aspect-ratio: 1 / 1;
 
@@ -243,13 +243,6 @@
   color: #ffffff;
 }
 
-.home-projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-
-  gap: 24px;
-}
-
 
 /* =========================
    Responsive
@@ -280,15 +273,7 @@
   }
 
   .hero-image {
-    width: min(300px, 75%);
-  }
-}
-
-
-@media (max-width: 768px) {
-
-  .home-projects-grid {
-    grid-template-columns: 1fr;
+    width: min(400px, 85%);
   }
 }
 

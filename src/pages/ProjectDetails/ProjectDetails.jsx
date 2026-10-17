@@ -2,6 +2,8 @@ import { Link, useParams } from "react-router-dom";
 
 import { projects } from "../../data/projects";
 import SpecularButton from "../../components/SpecularButton/SpecularButton";
+import TypeWriter from "../../components/TypeWriter/TypeWriter";
+import Specular from "../../components/Specular/Specular";
 
 import "./ProjectDetails.css";
 
@@ -54,8 +56,13 @@ function ProjectDetails() {
             Project
           </p>
 
-          <h1>
-            {project.title}
+          <h1 aria-label={project.title}>
+            {/* key restarts the typing when moving between projects */}
+            <TypeWriter
+              key={project.id}
+              text={project.title}
+              speed={45}
+            />
           </h1>
 
           <p className="project-details-description">
@@ -68,25 +75,27 @@ function ProjectDetails() {
 
           <div className="project-details-actions">
 
-            <SpecularButton
-              size="md"
-              radius={999}
-              tint="#ffffff"
-              tintOpacity={1}
-              textColor="#000000"
-              lineColor="#ffffff"
-              baseColor="#e5e5e5"
-              intensity={1}
-              shineSize={14}
-              shineFade={45}
-              thickness={1.2}
-              speed={0.4}
-              followMouse
-              proximity={260}
-              onClick={() => window.open(project.liveDemo, "_blank", "noopener,noreferrer")}
-            >
-              Live Demo
-            </SpecularButton>
+            {project.liveDemo && (
+              <SpecularButton
+                size="md"
+                radius={999}
+                tint="#ffffff"
+                tintOpacity={1}
+                textColor="#000000"
+                lineColor="#ffffff"
+                baseColor="#e5e5e5"
+                intensity={1}
+                shineSize={14}
+                shineFade={45}
+                thickness={1.2}
+                speed={0.4}
+                followMouse
+                proximity={260}
+                onClick={() => window.open(project.liveDemo, "_blank", "noopener,noreferrer")}
+              >
+                Live Demo
+              </SpecularButton>
+            )}
 
             <SpecularButton
               size="md"
@@ -125,12 +134,14 @@ function ProjectDetails() {
 
             <div className="project-details-technologies">
               {project.technologies.map((technology) => (
-                <span
+                <Specular
+                  as="span"
                   key={technology}
                   className="project-details-tag"
+                  proximity={140}
                 >
                   {technology}
-                </span>
+                </Specular>
               ))}
             </div>
 
@@ -144,15 +155,17 @@ function ProjectDetails() {
             </h2>
 
             <ul className="project-info-links">
-              <li>
-                <a
-                  href={project.liveDemo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Live demo ↗
-                </a>
-              </li>
+              {project.liveDemo && (
+                <li>
+                  <a
+                    href={project.liveDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Live demo ↗
+                  </a>
+                </li>
+              )}
               <li>
                 <a
                   href={project.github}
@@ -188,14 +201,16 @@ function ProjectDetails() {
           Main Image
           ========================= */}
 
-      <section className="project-details-preview">
+      {project.thumbnail && (
+        <section className="project-details-preview">
 
-        <img
-          src={project.thumbnail}
-          alt={`${project.title} preview`}
-        />
+          <img
+            src={project.thumbnail}
+            alt={`${project.title} preview`}
+          />
 
-      </section>
+        </section>
+      )}
 
 
       {/* =========================

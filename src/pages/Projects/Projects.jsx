@@ -5,6 +5,7 @@ import { projects } from "../../data/projects";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import Specular from "../../components/Specular/Specular";
 
 import "./Projects.css";
 
@@ -67,26 +68,46 @@ function Projects() {
         aria-label="Filter by technology"
       >
 
-        <button
+        <Specular
+          as="button"
           type="button"
           className={`projects-filter ${activeTechnology === null ? "is-active" : ""}`}
           aria-pressed={activeTechnology === null}
           onClick={() => setActiveTechnology(null)}
+          proximity={140}
         >
           All
-        </button>
+        </Specular>
 
+        {/* Clicking the active filter again deselects it */}
         {allTechnologies.map((technology) => (
-          <button
+          <Specular
+            as="button"
             key={technology}
             type="button"
             className={`projects-filter ${activeTechnology === technology ? "is-active" : ""}`}
             aria-pressed={activeTechnology === technology}
-            onClick={() => setActiveTechnology(technology)}
+            onClick={() => setActiveTechnology(
+              activeTechnology === technology ? null : technology
+            )}
+            proximity={140}
           >
             {technology}
-          </button>
+          </Specular>
         ))}
+
+        {activeTechnology && (
+          <Specular
+            as="button"
+            type="button"
+            className="projects-filter projects-filter-clear"
+            onClick={() => setActiveTechnology(null)}
+            aria-label={`Clear the ${activeTechnology} filter`}
+            proximity={140}
+          >
+            Clear filter ✕
+          </Specular>
+        )}
 
       </div>
 

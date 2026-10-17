@@ -1,58 +1,11 @@
+import { experiences } from "../../data/experience";
+
 import PageHeader from "../../components/PageHeader/PageHeader";
+import Specular from "../../components/Specular/Specular";
 
 import "./Experience.css";
 
-const experiences = [
-  {
-    id: 1,
-    organization: "Company Name",
-    role: "Frontend Developer",
-    startDate: "Jan 2025",
-    endDate: "Present",
-    location: "Mumbai, India",
-
-    description:
-      "Worked on building responsive and interactive web applications using modern frontend technologies.",
-
-    responsibilities: [
-      "Built reusable React components.",
-      "Developed responsive user interfaces.",
-      "Worked with APIs and application data.",
-    ],
-
-    technologies: [
-      "React",
-      "JavaScript",
-      "Tailwind CSS",
-    ],
-  },
-
-  {
-    id: 2,
-    organization: "Another Organization",
-    role: "Developer Intern",
-    startDate: "Jun 2024",
-    endDate: "Dec 2024",
-    location: "Remote",
-
-    description:
-      "Worked with the development team on improving existing applications and implementing new features.",
-
-    responsibilities: [
-      "Implemented new frontend features.",
-      "Fixed UI and functionality issues.",
-      "Collaborated with other developers.",
-    ],
-
-    technologies: [
-      "React",
-      "JavaScript",
-      "Git",
-    ],
-  },
-];
-
-// Listed newest first, so the last entry is where the timeline starts.
+// experiences is newest first, so the last entry is where the timeline starts.
 const technologyCount = new Set(
   experiences.flatMap((experience) => experience.technologies)
 ).size;
@@ -191,12 +144,14 @@ function Experience() {
                     <div className="experience-technologies">
                       {experience.technologies.map(
                         (technology) => (
-                          <span
+                          <Specular
+                            as="span"
                             key={technology}
                             className="technology-tag"
+                            proximity={140}
                           >
                             {technology}
-                          </span>
+                          </Specular>
                         )
                       )}
                     </div>

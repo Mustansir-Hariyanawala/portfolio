@@ -123,6 +123,58 @@
 
 
 /* =========================
+   Education + Achievements
+   ========================= */
+
+.about-education {
+  grid-column: span 2;
+}
+
+.about-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 22px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.about-list li + li {
+  padding-top: 22px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-list-meta {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 0.75rem;
+
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.about-list h3 {
+  margin: 0 0 6px;
+
+  font-size: 1.25rem;
+
+  color: #ffffff;
+}
+
+.about-card .about-list p {
+  margin: 0;
+
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+
+/* =========================
    Tech Stack
    ========================= */
 
@@ -146,6 +198,35 @@
   margin: 0;
 }
 
+/* One row per resume category: label on the left, cards on the right */
+.skill-groups {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.skill-group {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: start;
+
+  gap: 16px 24px;
+}
+
+.skill-group-label {
+  margin: 0;
+  padding-top: 14px;
+
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.45);
+}
+
 /* auto-fill keeps every card the same width and lets the row count adapt
    to however many skills there are. */
 .skills-grid {
@@ -161,9 +242,9 @@
   align-items: center;
   justify-content: center;
 
-  min-height: 72px;
+  min-height: 52px;
 
-  padding: 16px;
+  padding: 12px;
 
   background-color: rgba(255, 255, 255, 0.03);
 
@@ -203,8 +284,18 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .about-introduction {
+  .about-introduction,
+  .about-education,
+  .about-achievements {
     grid-column: 1 / -1;
+  }
+
+  .skill-group {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-group-label {
+    padding-top: 0;
   }
 
   /* portrait + first focus card share a row, the other two the next */

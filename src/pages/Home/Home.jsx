@@ -1,24 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
 
+import { profile } from "../../data/profile";
 import { projects } from "../../data/projects";
 import { skills } from "../../data/skills";
 
 import Connect from "../../components/Connect/Connect";
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import ProjectCarousel from "../../components/ProjectCarousel/ProjectCarousel";
 import SpecularButton from "../../components/SpecularButton/SpecularButton";
 import TypeWriter from "../../components/TypeWriter/TypeWriter";
+import Specular from "../../components/Specular/Specular";
 
 import "./Home.css";
-
-const FEATURED_COUNT = 2;
 
 function Home() {
   const navigate = useNavigate();
 
-  const featuredProjects = projects.slice(0, FEATURED_COUNT);
-
   return (
-    <main className="page home-page">
+    <main className="home-page">
 
       {/* =========================
           Hero Section
@@ -32,8 +30,8 @@ function Home() {
 
           <div className="hero-image-container">
             <img
-              src="/images/profile/profile.jpg"
-              alt="Mustansir Hariyanawala"
+              src={profile.photo}
+              alt={profile.name}
               className="hero-image"
             />
           </div>
@@ -49,9 +47,9 @@ function Home() {
 
             <h1
               className="hero-name"
-              aria-label="Mustansir Hariyanawala"
+              aria-label={profile.name}
             >
-              <TypeWriter text="Mustansir Hariyanawala" />
+              <TypeWriter text={profile.name} />
             </h1>
 
             <h2 className="hero-title">
@@ -59,15 +57,15 @@ function Home() {
             </h2>
 
             <p className="hero-description">
-              I build modern, responsive and user-friendly
-              web applications using React and modern web
-              technologies.
+              I build full-stack and AI-powered applications:
+              Spring Boot and React on the surface, agentic
+              RAG pipelines and LLM workflows underneath.
             </p>
 
 
-            {/* CTA Buttons — SpecularButton replaces the old .hero-button
-                links. It renders a native <button>, so routing/opening the
-                resume happens through onClick instead of href. */}
+            {/* CTA Buttons — SpecularButton renders a native <button>, so
+                routing and opening the resume (src/data/resume.pdf) happen
+                through onClick instead of href. */}
 
             <div className="hero-actions">
 
@@ -106,7 +104,7 @@ function Home() {
                 speed={0.35}
                 followMouse
                 proximity={250}
-                onClick={() => window.open("/resume.pdf", "_blank", "noopener,noreferrer")}
+                onClick={() => window.open(profile.resume, "_blank", "noopener,noreferrer")}
               >
                 Resume
               </SpecularButton>
@@ -124,9 +122,13 @@ function Home() {
 
               <ul className="hero-stack-list">
                 {skills.map((skill) => (
-                  <li key={skill}>
+                  <Specular
+                    as="li"
+                    key={skill}
+                    proximity={140}
+                  >
                     {skill}
-                  </li>
+                  </Specular>
                 ))}
               </ul>
 
@@ -166,14 +168,7 @@ function Home() {
 
         </div>
 
-        <div className="home-projects-grid">
-          {featuredProjects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-            />
-          ))}
-        </div>
+        <ProjectCarousel projects={projects} />
 
       </section>
 

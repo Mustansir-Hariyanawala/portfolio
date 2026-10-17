@@ -1,24 +1,26 @@
-import { skills } from "../../data/skills";
+import { achievements, education, profile } from "../../data/profile";
+import { skillGroups } from "../../data/skills";
 
 import PageHeader from "../../components/PageHeader/PageHeader";
+import Specular from "../../components/Specular/Specular";
 
 import "./About.css";
 
 const focusAreas = [
   {
-    title: "Frontend Development",
+    title: "Full-stack Development",
     description:
-      "Building responsive and interactive interfaces using modern web technologies.",
+      "Secure Spring Boot REST APIs with role-based access, backed by PostgreSQL and paired with responsive React dashboards.",
+  },
+  {
+    title: "Agentic AI & RAG",
+    description:
+      "Retrieval pipelines, multi-agent systems and knowledge graphs built with LangChain, LangGraph, ChromaDB and Neo4j.",
   },
   {
     title: "Problem Solving",
     description:
-      "Breaking down problems into smaller, practical and maintainable solutions.",
-  },
-  {
-    title: "Continuous Learning",
-    description:
-      "Exploring new technologies and improving my development skills through projects.",
+      "A 3-star CodeChef coder who enjoys breaking hard problems into clean, measurable solutions.",
   },
 ];
 
@@ -28,7 +30,8 @@ function About() {
 
       <PageHeader
         label="Get to know me"
-        title={<>About <em>Me</em></>}
+        title="About"
+        titleAccent="Me"
         subtitle="A little bit about who I am, what I do, and what I'm interested in."
       />
 
@@ -48,21 +51,25 @@ function About() {
           </h2>
 
           <p>
-            I'm a developer who enjoys building things for
-            the web and learning how technology works.
+            I'm a Computer Engineering student at SVKM's
+            Dwarkadas J. Sanghvi College of Engineering in
+            Mumbai, graduating in 2027, and I build software
+            that sits where full-stack development meets
+            applied AI.
           </p>
 
           <p>
-            I enjoy turning ideas into functional,
-            responsive and intuitive digital experiences.
-            I'm particularly interested in frontend
-            development and creating clean user interfaces.
+            As a Cyber AI Intern at DeepCytes Cyber Lab I
+            built LLM-driven workflows for penetration
+            testing and threat reporting. In my own projects
+            I build Spring Boot and React applications,
+            agentic RAG assistants and multi-agent systems.
           </p>
 
           <p>
-            Outside of writing code, I enjoy learning new
-            technologies, working on personal projects and
-            exploring new ideas.
+            I like work with measurable results: faster
+            audits, more accurate retrieval and forecasts
+            that beat their baseline.
           </p>
 
         </div>
@@ -72,8 +79,8 @@ function About() {
 
         <div className="about-card about-portrait">
           <img
-            src="/images/profile/profile.jpg"
-            alt="Mustansir Hariyanawala"
+            src={profile.photo}
+            alt={profile.name}
           />
         </div>
 
@@ -100,6 +107,60 @@ function About() {
         ))}
 
 
+        {/* Education — wide card */}
+
+        <div className="about-card about-education">
+
+          <h2>
+            Education
+          </h2>
+
+          <ul className="about-list">
+            {education.map((item) => (
+              <li key={item.institution}>
+                <span className="about-list-meta">
+                  {item.period} · {item.location}
+                </span>
+
+                <h3>
+                  {item.institution}
+                </h3>
+
+                <p>
+                  {item.qualification} · {item.detail}
+                </p>
+              </li>
+            ))}
+          </ul>
+
+        </div>
+
+
+        {/* Achievements */}
+
+        <div className="about-card about-achievements">
+
+          <h2>
+            Achievements
+          </h2>
+
+          <ul className="about-list">
+            {achievements.map((item) => (
+              <li key={item.title}>
+                <h3>
+                  {item.title}
+                </h3>
+
+                <p>
+                  {item.description}
+                </p>
+              </li>
+            ))}
+          </ul>
+
+        </div>
+
+
         {/* Tech stack — full-width card */}
 
         <div className="about-card about-skills">
@@ -114,13 +175,27 @@ function About() {
             </p>
           </div>
 
-          <div className="skills-grid">
-            {skills.map((skill) => (
+          <div className="skill-groups">
+            {skillGroups.map((group) => (
               <div
-                key={skill}
-                className="skill-card"
+                key={group.category}
+                className="skill-group"
               >
-                {skill}
+                <h3 className="skill-group-label">
+                  {group.category}
+                </h3>
+
+                <div className="skills-grid">
+                  {group.items.map((skill) => (
+                    <Specular
+                      key={skill}
+                      className="skill-card"
+                      proximity={160}
+                    >
+                      {skill}
+                    </Specular>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

@@ -1,0 +1,24 @@
+/* =========================
+   Specular
+   ========================= */
+
+.specular {
+  position: relative;
+}
+
+/* Canvas overlay, PAD (20px) larger than the element on every side so the
+   glow along the edge isn't clipped. */
+.specular-fx {
+  position: absolute;
+  inset: -20px;
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+.specular-fx canvas {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}

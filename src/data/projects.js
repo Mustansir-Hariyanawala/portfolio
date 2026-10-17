@@ -1,3 +1,15 @@
+// Each project's `id` is also its URL slug (/projects/:id). The Home page
+// carousel shows them in this order.
+//
+// Optional fields: `thumbnail`, `screenshots` and `liveDemo`. Leave them out
+// and the card shows a text placeholder and the Live Demo button is hidden.
+// Images live in ./images/projects/ and are imported so Vite bundles them.
+import fraudScreenshot from "./images/projects/Fraudulent-Analysis-Dashboard/screenshot-1.jpeg";
+import CogniScrptScreenshot from "./images/projects/CogniScript/screenshot-1.jpeg";
+import TreasuryScreenshot from "./images/projects/TreasuryPulse/screenshot-1.jpeg";
+import TreasuryScreenshot1 from "./images/projects/TreasuryPulse/screenshot-2.jpeg";
+import TreasuryScreenshot2 from "./images/projects/TreasuryPulse/screenshot-3.jpeg";
+
 export const projects = [
   {
     id: "fraudulent-checkout",
@@ -5,19 +17,19 @@ export const projects = [
     title: "Fraudulent Checkout Analysis Dashboard",
 
     shortDescription:
-      "A responsive weather app that shows real-time conditions and a 5-day forecast for any city, with clean data visualization and no clutter.",
+      "A fraud-monitoring platform that scores every banking transaction with a 14-signal risk engine and explains each decision on a secured analyst dashboard.",
 
     description:
-      "This project started as a way to practice working with a public REST API in React. It fetches live weather data from the OpenWeather API based on a city search, and displays current conditions alongside a 5-day forecast broken down by time of day. The main challenge was handling the API's inconsistent response shapes for different endpoints (current weather vs. forecast) and normalizing them into a single shape the UI could render predictably. I also added debounced search-as-you-type, loading skeletons instead of a blank screen during fetches, and graceful error states for invalid city names or network failures — the kind of details that are easy to skip in a tutorial project but matter in anything meant to feel finished.",
+      "A mini fraud-detection platform for banking transactions. Every incoming transaction is scored by a rule-based risk engine, assigned a risk level and a decision (approved, review or blocked), and shown to fraud analysts on a secured dashboard. Every fired rule is stored with its points, so analysts can see exactly why a transaction scored the way it did, and filter, sort and drill into the results. The backend is Spring Boot with Spring Data JPA and Spring Security; the dashboard is React.",
 
-    thumbnail:
-      "/images/projects/Fraudulent-Analysis-Dashboard/screenshot-1.png",
+    thumbnail: fraudScreenshot,
 
     technologies: [
+      "Java",
+      "Spring Boot",
+      "Spring Security",
+      "Spring Data JPA",
       "React",
-      "JavaScript",
-      "CSS",
-      "OpenWeather API",
     ],
 
     github:
@@ -27,58 +39,129 @@ export const projects = [
       "https://fraudulent-checkout-frontend.vercel.app/",
 
     screenshots: [
-      "/images/projects/Fraudulent-Analysis-Dashboard/screenshot-1.png",
-      "/images/projects/Fraudulent-Analysis-Dashboard/screenshot-1.jpeg",
+      fraudScreenshot,
     ],
 
     features: [
-      "Search weather by city name with debounced, as-you-type suggestions",
-      "Current conditions: temperature, humidity, wind speed, and 'feels like'",
-      "5-day forecast broken down into 3-hour intervals",
-      "Automatic unit conversion between Celsius and Fahrenheit",
-      "Loading skeletons and error states instead of a blank or broken screen",
-      "Fully responsive layout, from mobile through desktop",
+      "Rule-based risk scoring with 14 independent signals (amount anomaly, velocity, new device, impossible travel, watchlist and more)",
+      "Four risk levels (Low, Medium, High, Critical), each mapped to an approve, review or block decision",
+      "Explainable results: every fired rule is stored with its points",
+      "Staff-only dashboard with session login and Analyst / Admin roles",
+      "Multi-select filtering on customer, merchant, country, risk, status, amount, score and date, plus sorting and pagination",
+      "Live summary cards that refresh every 10 seconds",
     ],
   },
 
   {
-    id: "task-manager",
+    id: "treasury-pulse",
 
-    title: "Task Manager",
+    title: "TreasuryPulse",
 
+    thumbnail: TreasuryScreenshot,
+
+    screenshots: [
+      TreasuryScreenshot,
+      TreasuryScreenshot1,
+      TreasuryScreenshot2,
+    ],
+    
+    
     shortDescription:
-      "A drag-and-drop task board for organizing work into To Do, In Progress, and Done columns, with tasks persisted locally between sessions.",
+      "A liquidity command center that turns 46K transactions across 10 entities and 9 currencies into live cash positions, forecasts and funding decisions.",
 
     description:
-      "A Trello-style task board built to practice complex state management and drag-and-drop interactions without reaching for a heavy library. Tasks can be created, edited, deleted, and dragged between three columns — To Do, In Progress, and Done — with the board state persisted to localStorage so your tasks are still there when you come back. The trickiest part was getting drag-and-drop to feel natural: tracking which column and index a task is being dragged over, reordering the array in state without visual jank, and making sure keyboard users aren't locked out of reordering tasks entirely. Each task also supports a priority tag and an optional due date, both of which affect a small visual indicator on the card so the board stays scannable even as it fills up.",
-
-    thumbnail:
-      "/images/projects/task-manager/thumbnail.png",
+      "TreasuryPulse replaces manual Excel reconciliation with a live view of group cash. It consolidates 46K transactions across 10 entities and 9 currencies into real-time cash positions, forecasts the next 14 days with a Monte Carlo model, and recommends how to fund shortfalls. A Spring Boot REST API with JWT role-based access sits behind a React dashboard, and an agentic RAG assistant lets analysts ask questions in plain language and get grounded answers backed by the same forecasting tools.",
 
     technologies: [
+      "Java",
+      "Spring Boot",
+      "Spring Security",
       "React",
-      "Tailwind CSS",
-      "localStorage",
+      "PostgreSQL",
+      "ChromaDB",
+      "Python",
+      "Docker",
     ],
 
     github:
-      "https://github.com/yourusername/task-manager",
-
-    liveDemo:
-      "https://your-task-manager.com",
-
-    screenshots: [
-      "/images/projects/task-manager/screenshot-1.png",
-      "/images/projects/task-manager/screenshot-2.png",
-    ],
+      "https://github.com/Mustansir-Hariyanawala/TreasurePulse",
 
     features: [
-      "Drag-and-drop tasks between To Do, In Progress, and Done columns",
-      "Create, edit, and delete tasks inline without a page reload",
-      "Priority tags (Low / Medium / High) with color-coded indicators",
-      "Optional due dates, with overdue tasks visually flagged",
-      "Board state persisted in localStorage — refresh-proof without a backend",
-      "Keyboard-accessible reordering as a fallback to drag-and-drop",
+      "Consolidates 46K transactions across 10 entities and 9 currencies into live cash positions",
+      "14-day Monte Carlo cash forecast with P10/P50/P90 bands and buffer-breach alerts, beating a naive baseline by 28–53% in backtests",
+      "Spring Boot REST API with JWT role-based access and a React dashboard",
+      "FX VaR and an LP-based funding optimizer behind a maker–checker approval workflow",
+      "Agentic RAG chatbot that calls forecast, gap and what-if tools to answer analyst questions with grounded rationale and action plans",
+      "Automated unit and API contract tests, with the stack containerized in Docker",
+    ],
+  },
+
+  {
+    id: "cogniscript",
+
+    title: "CogniScript",
+    
+    thumbnail: CogniScrptScreenshot,
+
+    screenshots: [
+      CogniScrptScreenshot,
+    ],
+    
+    shortDescription:
+      "A RAG chatbot that answers questions over your own documents, with an isolated vector store per chat and routing across 5+ LLM providers.",
+
+    description:
+      "CogniScript enables document-based conversations by combining large language models with semantic retrieval. Users upload PDFs, docs and text files, which are chunked, embedded with HuggingFace models and stored in ChromaDB. Each chat session gets its own vector collection, so context never bleeds between conversations. A Flask REST API routes requests across 5+ LLM providers to balance speed and avoid vendor lock-in, and a React frontend streams responses with automatic source citations.",
+
+    technologies: [
+      "Python",
+      "Flask",
+      "React",
+      "LangChain",
+      "ChromaDB",
+      "MongoDB",
+    ],
+
+    github:
+      "https://github.com/Mustansir-Hariyanawala/CogniScript",
+
+    features: [
+      "End-to-end RAG pipeline with LangChain, HuggingFace embeddings and recursive chunking, reducing data processing latency by 35%",
+      "Isolated per-session ChromaDB vector stores with 92%+ retrieval precision and no context-bleed between chats",
+      "Flask REST API with dynamic routing across 5+ LLM providers (OpenAI, Gemini, Claude, Groq)",
+      "React frontend with streaming LLM responses and automatic source citation tracking",
+    ],
+  },
+
+  {
+    id: "citation-edge",
+
+    title: "CitationEdge",
+
+    shortDescription:
+      "A multi-agent manuscript reviewer that extracts claims, finds citation gaps and scores arguments, backed by a Neo4j knowledge graph.",
+
+    description:
+      "CitationEdge reviews academic manuscripts with a team of parallel agents: one parses the paper, others extract claims, detect citation gaps, score the writing and analyse the argument, and their results are coordinated into a single report. The agents share a Neo4j graph memory of papers, claims and references that they query with multi-hop Cypher, and a tool-using retrieval agent searches Semantic Scholar to find and rank the papers a manuscript should be citing.",
+
+    technologies: [
+      "Python",
+      "FastAPI",
+      "LLM Agents",
+      "RAG",
+      "Neo4j",
+      "SciBERT",
+      "spaCy",
+    ],
+
+    github:
+      "https://github.com/ChintanD2205/FinalYearBackend",
+
+    features: [
+      "Parallel agents for parsing, claim extraction, citation-gap detection, literary scoring and argument analysis, coordinated into one report",
+      "Neo4j graph memory with 7 entity types, queried with multi-hop Cypher over papers, claims and references",
+      "Tool-using retrieval agent (Semantic Scholar API + Cypher) that scores candidate papers",
+      "Citation gaps ranked into 3 priority tiers",
     ],
   },
 ];

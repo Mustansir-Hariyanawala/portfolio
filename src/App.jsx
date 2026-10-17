@@ -13,7 +13,8 @@ import Contact from "./pages/Contact/Contact";
 function App() {
   return (
     <BrowserRouter>
-      <NeuralBackground />
+      {/* pushOnClick: true adds particles where you click, false turns it off */}
+      <NeuralBackground pushOnClick={true} />
 
       <Navbar />
 

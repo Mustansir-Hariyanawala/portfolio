@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+import { profile } from "../../data/profile";
+
 import PillNav from "./PillNav/PillNav";
 
 import "./Navbar.css";
 
-// Your logo. Drop your image into public/images/logo/ and point this at it
-// (e.g. "/images/logo/logo.png"). The current file is a placeholder "M".
-const LOGO_SRC = "/images/logo/logo.svg";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -34,7 +33,7 @@ function Navbar() {
         {/* Logo — links home */}
         <Link to="/" className="navbar-logo">
           <img
-            src={LOGO_SRC}
+            src={profile.logo}
             alt="Home"
           />
         </Link>

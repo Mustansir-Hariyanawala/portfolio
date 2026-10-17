@@ -1,18 +1,10 @@
-import { useState } from "react";
+import { profile } from "../../data/profile";
+
+import SocialLinks from "../SocialLinks/SocialLinks";
 
 import "./Connect.css";
 
 function Connect() {
-  const [email, setEmail] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    console.log("Email submitted:", email);
-
-    setEmail("");
-  };
-
   return (
     <section className="connect">
 
@@ -29,31 +21,24 @@ function Connect() {
           </h2>
 
           <p className="connect-description">
-            Drop your email below and let's connect.
+            Find me on GitHub and LinkedIn, or drop me an email.
           </p>
 
         </div>
 
 
-        <form
-          className="connect-form"
-          onSubmit={handleSubmit}
-        >
+        <div className="connect-links">
 
-          <input
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder="Enter your email"
-            aria-label="Your email address"
-            required
-          />
+          <SocialLinks />
 
-          <button type="submit">
-            Connect
-          </button>
+          <a
+            href={`mailto:${profile.email}`}
+            className="connect-email"
+          >
+            {profile.email}
+          </a>
 
-        </form>
+        </div>
 
       </div>
 

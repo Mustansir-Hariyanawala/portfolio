@@ -65,6 +65,13 @@
   color: #000000;
 }
 
+/* Shown only while a filter is active */
+.projects-filter-clear {
+  border-style: dashed;
+
+  background-color: transparent;
+}
+
 
 /* =========================
    Projects Grid

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import SpecularButton from "../SpecularButton/SpecularButton";
+import Specular from "../Specular/Specular";
 
 import "./ProjectCard.css";
 
@@ -16,11 +17,21 @@ function ProjectCard({ project }) {
         to={`/projects/${project.id}`}
         className="project-card-image-link"
       >
-        <img
-          src={project.thumbnail}
-          alt={project.title}
-          className="project-card-image"
-        />
+        {project.thumbnail ? (
+          <img
+            src={project.thumbnail}
+            alt={project.title}
+            className="project-card-image"
+          />
+        ) : (
+          // No screenshot yet: the title set large stands in for one
+          <div
+            className="project-card-image project-card-placeholder"
+            aria-hidden="true"
+          >
+            {project.title}
+          </div>
+        )}
       </Link>
 
 
@@ -44,12 +55,14 @@ function ProjectCard({ project }) {
         <div className="project-card-technologies">
 
           {project.technologies.map((technology) => (
-            <span
+            <Specular
+              as="span"
               key={technology}
               className="project-tag"
+              proximity={120}
             >
               {technology}
-            </span>
+            </Specular>
           ))}
 
         </div>

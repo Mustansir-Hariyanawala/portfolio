@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 
+import './PillNav.css';
+
 const PillNav = ({
   logo,
   logoAlt = 'Logo',
@@ -273,14 +275,12 @@ const PillNav = ({
   };
 
   return (
-    // NOTE: was `absolute top-[1em] z-[1000] w-full left-0 md:w-auto md:left-auto`.
-    // Changed to `relative` because the parent <header> (Navbar.jsx) already
-    // owns fixed positioning + z-index for the whole bar; PillNav just needs
-    // to flow normally inside it now. justify-self-center puts it in the
-    // middle of .navbar-container's grid on desktop.
-    <div className="relative w-full md:w-auto justify-self-end md:justify-self-center">
+    // Styles in PillNav.css. The parent <header> (Navbar.jsx) owns fixed
+    // positioning + z-index for the whole bar, so this just flows inside
+    // .navbar-container's grid (centred on desktop).
+    <div className="pill-nav-wrap">
       <nav
-        className={`w-full md:w-max flex items-center justify-end md:justify-center box-border ${className}`}
+        className={`pill-nav ${className}`}
         aria-label="Primary"
         style={cssVars}
       >
@@ -294,14 +294,9 @@ const PillNav = ({
               ref={el => {
                 logoRef.current = el;
               }}
-              className="rounded-full p-2 inline-flex items-center justify-center overflow-hidden"
-              style={{
-                width: 'var(--nav-h)',
-                height: 'var(--nav-h)',
-                background: 'var(--base, #000)'
-              }}
+              className="pill-nav-logo"
             >
-              <img src={logo} alt={logoAlt} ref={logoImgRef} className="w-full h-full object-cover block" />
+              <img src={logo} alt={logoAlt} ref={logoImgRef} />
             </Link>
           ) : (
             <a
@@ -311,67 +306,41 @@ const PillNav = ({
               ref={el => {
                 logoRef.current = el;
               }}
-              className="rounded-full p-2 inline-flex items-center justify-center overflow-hidden"
-              style={{
-                width: 'var(--nav-h)',
-                height: 'var(--nav-h)',
-                background: 'var(--base, #000)'
-              }}
+              className="pill-nav-logo"
             >
-              <img src={logo} alt={logoAlt} ref={logoImgRef} className="w-full h-full object-cover block" />
+              <img src={logo} alt={logoAlt} ref={logoImgRef} />
             </a>
           )
         )}
 
         <div
           ref={navItemsRef}
-          className="relative items-center rounded-full hidden md:flex"
-          style={{
-            height: 'var(--nav-h)',
-            background: 'var(--base, #000)'
-          }}
+          className="pill-nav-items"
         >
           <ul
             role="menubar"
-            className="list-none flex items-stretch m-0 p-[3px] h-full"
-            style={{ gap: 'var(--pill-gap)' }}
+            className="pill-nav-list"
           >
             {items.map((item, i) => {
               const isActive = activeHref === item.href;
 
-              const pillStyle = {
-                background: 'var(--pill-bg, #fff)',
-                color: 'var(--pill-text, var(--base, #000))',
-                paddingLeft: 'var(--pill-pad-x)',
-                paddingRight: 'var(--pill-pad-x)'
-              };
-
               const PillContent = (
                 <>
                   <span
-                    className="hover-circle absolute left-1/2 bottom-0 rounded-full z-[1] block pointer-events-none"
-                    style={{
-                      background: 'var(--base, #000)',
-                      willChange: 'transform'
-                    }}
+                    className="hover-circle"
                     aria-hidden="true"
                     ref={el => {
                       circleRefs.current[i] = el;
                     }}
                   />
-                  <span className="label-stack relative inline-block leading-[1] z-[2]">
+                  <span className="label-stack">
                     <span
-                      className="pill-label relative z-[2] inline-block leading-[1]"
-                      style={{ willChange: 'transform' }}
+                      className="pill-label"
                     >
                       {item.label}
                     </span>
                     <span
-                      className="pill-label-hover absolute left-0 top-0 z-[3] inline-block"
-                      style={{
-                        color: 'var(--hover-text, #fff)',
-                        willChange: 'transform, opacity'
-                      }}
+                      className="pill-label-hover"
                       aria-hidden="true"
                     >
                       {item.label}
@@ -379,25 +348,20 @@ const PillNav = ({
                   </span>
                   {isActive && (
                     <span
-                      className="absolute left-1/2 -bottom-[6px] -translate-x-1/2 w-3 h-3 rounded-full z-[4]"
-                      style={{ background: 'var(--base, #000)' }}
+                      className="pill-active-dot"
                       aria-hidden="true"
                     />
                   )}
                 </>
               );
 
-              const basePillClasses =
-                'relative overflow-hidden inline-flex items-center justify-center h-full no-underline rounded-full box-border font-semibold text-[16px] leading-[0] uppercase tracking-[0.2px] whitespace-nowrap cursor-pointer px-0';
-
               return (
-                <li key={item.href} role="none" className="flex h-full">
+                <li key={item.href} role="none">
                   {isRouterLink(item.href) ? (
                     <Link
                       role="menuitem"
                       to={item.href}
-                      className={basePillClasses}
-                      style={pillStyle}
+                      className="pill"
                       aria-label={item.ariaLabel || item.label}
                       onMouseEnter={() => handleEnter(i)}
                       onMouseLeave={() => handleLeave(i)}
@@ -408,8 +372,7 @@ const PillNav = ({
                     <a
                       role="menuitem"
                       href={item.href}
-                      className={basePillClasses}
-                      style={pillStyle}
+                      className="pill"
                       aria-label={item.ariaLabel || item.label}
                       onMouseEnter={() => handleEnter(i)}
                       onMouseLeave={() => handleLeave(i)}
@@ -428,28 +391,17 @@ const PillNav = ({
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
           aria-expanded={isMobileMenuOpen}
-          className="md:hidden rounded-full border-0 flex flex-col items-center justify-center gap-1 cursor-pointer p-0 relative"
-          style={{
-            width: 'var(--nav-h)',
-            height: 'var(--nav-h)',
-            background: 'var(--base, #000)'
-          }}
+          className="pill-nav-toggle"
         >
-          <span
-            className="hamburger-line w-4 h-0.5 rounded origin-center transition-all duration-[10ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
-            style={{ background: 'var(--pill-bg, #fff)' }}
-          />
-          <span
-            className="hamburger-line w-4 h-0.5 rounded origin-center transition-all duration-[10ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
-            style={{ background: 'var(--pill-bg, #fff)' }}
-          />
+          <span className="hamburger-line" />
+          <span className="hamburger-line" />
         </button>
       </nav>
 
       {/* Mobile menu — styles in NavBar/Navbar.css (.mobile-menu-*) */}
       <div
         ref={mobileMenuRef}
-        className="mobile-menu md:hidden"
+        className="mobile-menu"
         style={cssVars}
       >
         <p className="mobile-menu-label">

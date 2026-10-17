@@ -1,0 +1,82 @@
+/* =========================
+   Specular Button
+   ========================= */
+
+/* Colours and radius come in as custom properties from SpecularButton.jsx */
+.specular-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+
+  border: none;
+  border-radius: var(--sb-radius);
+  outline: none;
+
+  background: color-mix(
+    in srgb,
+    var(--sb-tint) calc(var(--sb-tint-opacity) * 100%),
+    transparent
+  );
+  backdrop-filter: blur(var(--sb-blur));
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.25);
+
+  color: var(--sb-text-color);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.01em;
+
+  cursor: pointer;
+
+  transition: transform 0.15s ease;
+}
+
+.specular-button:active {
+  transform: scale(0.97);
+}
+
+.specular-button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.specular-button:disabled {
+  opacity: 0.55;
+
+  cursor: default;
+}
+
+.specular-button:disabled:active {
+  transform: none;
+}
+
+/* Above the effect canvas */
+.specular-button-label {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Sizes */
+
+.specular-button--sm {
+  padding: 10px 22px;
+
+  font-size: 0.85rem;
+}
+
+.specular-button--md {
+  padding: 14px 30px;
+
+  font-size: 1rem;
+}
+
+.specular-button--lg {
+  padding: 18px 40px;
+
+  font-size: 1.15rem;
+}

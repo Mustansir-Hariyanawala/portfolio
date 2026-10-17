@@ -1,0 +1,143 @@
+/* =========================
+   Project Carousel
+   ========================= */
+
+/* Two cards per view on desktop, one (with the next peeking in) on phones.
+   ProjectCarousel.jsx drives scrollLeft for the constant drift, so there is
+   no scroll-snap here; the scrollbar is hidden. */
+.project-carousel-track {
+  --carousel-gap: 24px;
+
+  display: flex;
+
+  gap: var(--carousel-gap);
+
+  /* Room for the card hover lift and shadow, which overflow would clip;
+     the negative margins keep the layout where it was. */
+  margin: -12px 0 -36px;
+  padding: 12px 0 36px;
+
+  list-style: none;
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+
+  /* Cards fade in and out at the edges instead of being cut off */
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 5%,
+    #000 95%,
+    transparent
+  );
+
+  cursor: grab;
+}
+
+.project-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.project-carousel-track.is-dragging {
+  cursor: grabbing;
+
+  user-select: none;
+}
+
+.project-carousel-slide {
+  /* Exactly two per view */
+  flex: 0 0 calc((100% - var(--carousel-gap)) / 2);
+
+  display: flex;
+}
+
+/* ProjectCard fills the slide so neighbours stay equal height */
+.project-carousel-slide > * {
+  flex: 1;
+}
+
+
+/* =========================
+   Controls
+   ========================= */
+
+.project-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-top: 28px;
+}
+
+.project-carousel-hint {
+  margin: 0;
+
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.project-carousel-arrows {
+  display: flex;
+
+  gap: 10px;
+}
+
+.project-carousel-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  border: 1px solid var(--card-border-hover);
+  border-radius: 50%;
+
+  background-color: var(--card-bg-active);
+
+  color: #ffffff;
+  font-size: 1.1rem;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.project-carousel-arrow:hover {
+  background-color: #ffffff;
+  border-color: #ffffff;
+
+  color: #000000;
+}
+
+.project-carousel-arrow:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 3px;
+}
+
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .project-carousel-track {
+    --carousel-gap: 16px;
+  }
+
+  .project-carousel-slide {
+    flex-basis: 86%;
+  }
+}

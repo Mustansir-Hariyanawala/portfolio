@@ -1,0 +1,70 @@
+/* =========================
+   Social Links
+   ========================= */
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 14px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 64px;
+
+  border: 1px solid var(--card-border-hover);
+  border-radius: 50%;
+
+  background-color: var(--card-bg-active);
+
+  color: rgba(255, 255, 255, 0.85);
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.social-link svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Inverts to a white disc, like the primary buttons */
+.social-link:hover,
+.social-link:focus-visible {
+  transform: translateY(-3px);
+
+  background-color: #ffffff;
+  border-color: #ffffff;
+
+  color: #000000;
+
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.12);
+}
+
+.social-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .social-link,
+  .social-link:hover,
+  .social-link:focus-visible {
+    transform: none;
+  }
+}
